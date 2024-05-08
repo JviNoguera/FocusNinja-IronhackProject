@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user';
-import { useRouter } from 'vue-router'
+import router from '@/router';
 
-const router = useRouter()
 const userStore = useUserStore();
 const email = ref('');
 const password = ref('');
@@ -13,7 +12,7 @@ function checkUser () {
     userStore.signIn(email.value, password.value)
     email.value = ''
     password.value = ''
-   if (userStore.user) router.push({ path: '/Dashboard' })
+   if (userStore.user) router.push({ path: '/' })
    else alert('Are you signed up? Please check your email or password!')
     
 }

@@ -3,9 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import AuthView from '@/views/AuthView.vue'
 import SignIn from '@/components/SignIn.vue'
-import SignUp from '@/components/SignUp.vue'
-
-export default function () {         
+import SignUp from '@/components/SignUp.vue'       
 
     const router = createRouter({
         history: createWebHistory(),
@@ -16,6 +14,9 @@ export default function () {
           { path: '/signup', component: SignUp }
 
         ]
-      })
-      return router 
-        }
+      });
+
+      export default router
+       
+        // tengo que volver a agregar el router como una funcion, porue me dejo de funcionar el Auth, 
+        // sin razón aparente.
