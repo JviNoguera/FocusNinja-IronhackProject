@@ -13,11 +13,11 @@ function toogleHasUser() {
 <template>
   <section>
     <article v-if="hasUser">
-      <signIn></signIn>
+      <SignIn/>
       <button @click="toogleHasUser">I Want to Sign Up!</button>
     </article>
     <article v-else>
-      <signUp></signUp>
+      <SignUp/>
       <button @click="toogleHasUser">I already have an account!</button>
     </article>
   </section>

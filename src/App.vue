@@ -2,24 +2,25 @@
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from './stores/user.js'
-import AuthView from './views/DashboardView.vue';
-import router from './router';
+import AuthView from './views/AuthView.vue'
+import { useRouter } from 'vue-router'
 
-
+const router = useRouter()
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
 
 onMounted(async () => {
   try {
-    await userStore.fetchUser() 
+    await userStore.fetchUser()
     if (!user.value) {
-      router.push({ path: '/auth' });
+      // continue to login or signup
+      router.push({ path: '/auth' })
     } else {
       // continue to dashboard
-      router.push({ path: '/' });
+      router.push({ path: '/' })
     }
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 })
 </script>
@@ -27,10 +28,9 @@ onMounted(async () => {
 <template>
   <section>
     <h1>Hola Estoy Conectado</h1>
-    <AuthView/>
-    <router-view class="app-main" /> 
+    <router-view></router-view>
+  <!-- <router-view/>> -->
   </section>
 </template>
 
 <style scoped></style>
-
