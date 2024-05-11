@@ -42,12 +42,11 @@ const handleSubmit = async () => {
 
 <template>
   <div class="taskMaker">
-    <h2>New Task</h2>
     <form @submit.prevent="handleSubmit">
       <fieldset>
-        <legend>Let's make things happen</legend>
+        <legend><h1>New Task</h1></legend>
 
-        <div>
+        <div class="title">
           <label for="titleForm">Title</label>
           <input
             type="text"
@@ -58,7 +57,7 @@ const handleSubmit = async () => {
           />
         </div>
 
-        <div>
+        <div class="description">
           <label for="descriptionForm">Description</label>
           <input
             type="text-area"
@@ -67,34 +66,135 @@ const handleSubmit = async () => {
             placeholder="example: going to the grocery store, get cabbages, bacon and boil some potatoes!"
           />
         </div>
-
-        <div>
-          <label for="durationForm">How many time i need to makes this happen? (minutes)</label>
-          <select id="durationForm" v-model="selectedDuration" @change="handleDurationChange">
-            <option value="15">15min</option>
-            <option value="30">30min</option>
-            <option value="45">45min</option>
-            <option value="60">1hr</option>
-            <option value="90">1:30hrs</option>
-            <option value="120">2hrs</option>
-            <option value="custom">Custom</option>
-          </select>
-          <input
-            type="text"
-            v-if="selectedDuration === 'custom'"
-            v-model="customDuration"
-            placeholder="Ej. 52m"
-          />
-        </div>
-        <div>
-          <label for="reminderForm">Start Time</label>
-          <input type="datetime-local" id="reminderForm" v-model="reminder" />
-        </div>
+        <section class="containerDurationReminder">
+          <div class="duration">
+            <label for="durationForm">How many time i need?</label>
+            <select id="durationForm" v-model="selectedDuration" @change="handleDurationChange">
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">60 minutes</option>
+              <option value="90">90 minutes</option>
+              <option value="120">120 minutes</option>
+              <option value="custom">Custom</option>
+            </select>
+            <input
+              type="text"
+              v-if="selectedDuration === 'custom'"
+              v-model="customDuration"
+              placeholder="Ej. 52m"
+            />
+          </div>
+          <div class="reminder">
+            <label for="reminderForm">Start Time</label>
+            <input type="datetime-local" id="reminderForm" v-model="reminder" />
+          </div>
+        </section>
+        <button class="submitButton" type="submit">Create New Task</button>
       </fieldset>
-
-      <button type="submit">Create New Task</button>
     </form>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Form */
+
+fieldset {
+  width: 500px;
+  margin: 30px 120px;
+  text-align: left;
+  margin-top: 10%;
+  background-color: whitesmoke;
+  border: none;
+  box-shadow: gray 0px 0px 10px;
+}
+
+input {
+  background: gainsboro;
+}
+
+label {
+  color: grey;
+  font-size: 17px;
+}
+
+.title {
+  width: 100%;
+}
+
+#titleForm {
+  width: 100%;
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  margin-block-start: 10px;
+}
+
+.description {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#descriptionForm {
+  width: 100%;
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  margin-block-start: 10px;
+}
+
+.containerDurationReminder {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.containerDurationReminder div {
+  width: 49%;
+}
+
+.duration {
+  width: 100%;
+  margin-block-start: 10px;
+}
+
+.reminder {
+  width: 100%;
+  margin-block-start: 10px;
+}
+
+#durationForm {
+  width: 100%;
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  margin-block-start: 10px;
+  padding-left: 15px;
+  margin-left: auto;
+}
+
+#reminderForm {
+  margin-right: 10px;
+  width: 89%; /* esto no es correcto */
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-block-start: 10px;
+}
+
+.submitButton {
+  background-color: gray;
+  color: #f2f4fc;
+  padding: 10px 10px;
+  width: 100%;
+  height: 70px;
+  cursor: pointer;
+  box-shadow: none;
+  outline: none;
+  border-style: none;
+  margin-block-start: 20px;
+  margin-bottom: 5px;
+}
+</style>
