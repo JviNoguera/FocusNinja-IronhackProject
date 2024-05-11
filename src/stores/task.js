@@ -3,9 +3,6 @@
 import { defineStore } from "pinia";
 import supabase from '../supabase.js';
 import { useUserStore } from '../stores/user.js';
-
-
-const userStore = useUserStore();
  
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
@@ -14,26 +11,33 @@ export const useTaskStore = defineStore("tasks", {
 
   actions: {
     async fetchTasks() {
-      await userStore.fetchUser();
-      const userId = userStore.user.id;
-      const { data: tasks } = await supabase
+      const userId = useUserStore().user.id;
+      const { data: fetchedTasks, error } = await supabase
         .from("tasks")
         .select("*")
-        .eq('userId', userId)
+        .eq('user_id', userId)
         .order("id", { ascending: false });
-      this.tasks = tasks; //esto tengo que arreglarlo. mirar documentacion de supabase
+
+        if (error) {
+          console.error("Error fetching tasks:", error.message);
+          return;
+        }
+      this.tasks = fetchedTasks || [] ;
     },
 
     async addTask(taskData) {
       const userStore = useUserStore();
       const userId = userStore.user.id;
+      console.log(taskData);
       const { data: task, error } = await supabase
         .from("tasks")
-        .insert({...taskData, userId});
+        .insert({...taskData, userId})
+
       if (error) throw error;
-      if (task) {
+      
+      else (task) 
         await this.fetchTasks(); 
       }
     }
-  },
-});
+  }
+);

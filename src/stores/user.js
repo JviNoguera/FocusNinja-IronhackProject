@@ -3,13 +3,11 @@
 import { defineStore } from 'pinia';
 import supabase from '../supabase.js';
 
-
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: null,
   }),
- // remember to update the state from actions
- 
+
   actions: {
     // function to fetch the user from supabase
     async fetchUser () {
@@ -40,6 +38,7 @@ export const useUserStore = defineStore('user', {
       if (error) throw error;
       this.user = null;
     },
+    // persist to keep the user logged in even if the page is refreshed.
     persist: {
       enabled: true,
       strategies: [
