@@ -32,17 +32,92 @@ async function checkUser() {
 <template>
   <section>
     <form @submit.prevent="checkUser">
-      <div>
-        <input type="email" v-model="email" placeholder="e-mail" />
-      </div>
-      <div>
-        <input type="password" v-model="password" placeholder="Password" />
-      </div>
-      <div>
-        <button type="submit">Sign In</button>
+      <div class="signIn">
+        <div class="email">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" v-model="email" placeholder="taskninja@example.com"/>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="password" placeholder="YourPassword"/>
+        </div>
+        <div>
+          <button class="submitButton" type="submit">Sign In</button>
+        </div>
       </div>
     </form>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+/* Form */
+
+.signIn {
+  width: 500px;
+  margin: 30px 120px;
+  text-align: left;
+  margin-top: 10%;
+  background-color: whitesmoke;
+  border: none;
+  box-shadow: gray 0px 0px 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input {
+  background: gainsboro;
+}
+
+label {
+  color: grey;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.email {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#email {
+  width: 480px;
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  margin-block-start: 10px;
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+.password {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#password {
+  width: 480px;
+  border: none;
+  background-color: gainsboro;
+  height: 60px;
+  margin-block-start: 10px;
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+.submitButton {
+  background-color: gray;
+  color: #f2f4fc;
+  width: 495px;
+  height: 70px;
+  cursor: pointer;
+  box-shadow: none;
+  outline: none;
+  border-style: none;
+  margin-block-start: 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+</style>
+

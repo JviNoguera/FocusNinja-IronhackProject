@@ -28,7 +28,7 @@ const handleSubmit = async () => {
     title: title.value,
     description: description.value,
     duration: duration,
-    customDuration: customDuration.value,
+    custom_duration: customDuration.value,
     reminder: reminder.value
   })
   // Reset form values after task is added
@@ -43,55 +43,51 @@ const handleSubmit = async () => {
 <template>
   <div class="taskMaker">
     <form @submit.prevent="handleSubmit">
-      <fieldset>
-        <legend><h1>New Task</h1></legend>
+      <div class="title">
+        <label for="titleForm">Title</label>
+        <input
+          type="text"
+          id="titleForm"
+          v-model="title"
+          placeholder="Ex: Preps for tonight's dinner!"
+          required
+        />
+      </div>
 
-        <div class="title">
-          <label for="titleForm">Title</label>
+      <div class="description">
+        <label for="descriptionForm">Description</label>
+        <input
+          type="text-area"
+          id="descriptionForm"
+          v-model="description"
+          placeholder="Ex: Go to the grocery store, get cabbages, bacon and boil some potatoes!"
+        />
+      </div>
+      <section class="containerDurationReminder">
+        <div class="duration">
+          <label for="durationForm">How many time i need?</label>
+          <select id="durationForm" v-model="selectedDuration" @change="handleDurationChange">
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">60 minutes</option>
+            <option value="90">90 minutes</option>
+            <option value="120">120 minutes</option>
+            <option value="custom">Custom</option>
+          </select>
           <input
             type="text"
-            id="titleForm"
-            v-model="title"
-            placeholder="example: preps for dinner!"
-            required
+            v-if="selectedDuration === 'custom'"
+            v-model="customDuration"
+            placeholder="Ej. 52m"
           />
         </div>
-
-        <div class="description">
-          <label for="descriptionForm">Description</label>
-          <input
-            type="text-area"
-            id="descriptionForm"
-            v-model="description"
-            placeholder="example: going to the grocery store, get cabbages, bacon and boil some potatoes!"
-          />
+        <div class="reminder">
+          <label for="reminderForm">Starting Time</label>
+          <input type="datetime-local" id="reminderForm" v-model="reminder" />
         </div>
-        <section class="containerDurationReminder">
-          <div class="duration">
-            <label for="durationForm">How many time i need?</label>
-            <select id="durationForm" v-model="selectedDuration" @change="handleDurationChange">
-              <option value="15">15 minutes</option>
-              <option value="30">30 minutes</option>
-              <option value="45">45 minutes</option>
-              <option value="60">60 minutes</option>
-              <option value="90">90 minutes</option>
-              <option value="120">120 minutes</option>
-              <option value="custom">Custom</option>
-            </select>
-            <input
-              type="text"
-              v-if="selectedDuration === 'custom'"
-              v-model="customDuration"
-              placeholder="Ej. 52m"
-            />
-          </div>
-          <div class="reminder">
-            <label for="reminderForm">Start Time</label>
-            <input type="datetime-local" id="reminderForm" v-model="reminder" />
-          </div>
-        </section>
-        <button class="submitButton" type="submit">Create New Task</button>
-      </fieldset>
+      </section>
+      <button class="submitButton" type="submit">Create New Task</button>
     </form>
   </div>
 </template>
@@ -99,14 +95,14 @@ const handleSubmit = async () => {
 <style scoped>
 /* Form */
 
-fieldset {
+.taskMaker {
   width: 500px;
-  margin: 30px 120px;
+  margin: 20px;
   text-align: left;
-  margin-top: 10%;
-  background-color: whitesmoke;
+  background-color: var(--bg-color);
   border: none;
-  box-shadow: gray 0px 0px 10px;
+  box-shadow: var(--inner-items-box-shadow);
+  padding: 10px;
 }
 
 input {
@@ -114,43 +110,52 @@ input {
 }
 
 label {
-  color: grey;
-  font-size: 17px;
+  color: var(--btn-color);
+  font-size: 18px;
+  margin-left: 5px;
+  font-weight: 500;
+  
 }
 
 .title {
   width: 100%;
+  margin-top: 15px;
 }
 
 #titleForm {
-  width: 100%;
+  width: 480px;
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
+  padding-left: 15px;
+  
 }
 
 .description {
   width: 100%;
   margin-top: 10px;
+  margin-top: 20px;
 }
 
 #descriptionForm {
-  width: 100%;
+  width: 480px;
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
+  padding-left: 15px;
 }
 
 .containerDurationReminder {
   display: flex;
-  width: 100%;
+  width: 480px;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
 .containerDurationReminder div {
-  width: 49%;
+  width: 48%;
 }
 
 .duration {
@@ -166,29 +171,35 @@ label {
 #durationForm {
   width: 100%;
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
   margin-left: auto;
 }
 
+.duration select {
+  color: var(--text-color);;
+}
+
 #reminderForm {
   margin-right: 10px;
-  width: 89%; /* esto no es correcto */
+  width: 100%; /* esto no es correcto */
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   padding-left: 15px;
-  padding-right: 15px;
   margin-block-start: 10px;
 }
 
+.reminder input {
+  color: var(--text-color);
+}
+
 .submitButton {
-  background-color: gray;
-  color: #f2f4fc;
-  padding: 10px 10px;
-  width: 100%;
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
+  width: 480px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -196,5 +207,6 @@ label {
   border-style: none;
   margin-block-start: 20px;
   margin-bottom: 5px;
+  margin-top: 30px;
 }
 </style>
