@@ -30,7 +30,7 @@ async function checkUser() {
 </script>
 
 <template>
-  <section>
+  <section class="containerSignIn">
     <form @submit.prevent="checkUser">
       <div class="signIn">
         <div class="email">
@@ -53,11 +53,16 @@ async function checkUser() {
 
 /* Form */
 
+.containerSignIn {
+  display: flex;
+  justify-content: center;
+}
+
 .signIn {
   width: 500px;
   margin: 30px 120px;
   text-align: left;
-  margin-top: 10%;
+  margin-top: 40%;
   background-color: whitesmoke;
   border: none;
   box-shadow: gray 0px 0px 10px;
@@ -106,9 +111,9 @@ label {
 }
 
 .submitButton {
+  width: 480px;
   background-color: gray;
   color: #f2f4fc;
-  width: 495px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import SignUp from '@/components/SignUp.vue'
 import SignIn from '@/components/SignIn.vue'
-import AppHeader from '@/components/AppHeader.vue';
+
 
 const hasUser = ref(true)
 
@@ -12,8 +12,7 @@ function toogleHasUser() {
 </script>
 
 <template>
-  <AppHeader/>
-  <section>
+  <section class="containerAuth">
     <h1 hidden>Auth-View</h1>
     <article v-if="hasUser">
       <SignIn /> <div class="toogleBtn">
@@ -34,6 +33,11 @@ function toogleHasUser() {
 
 <style scoped>
 
+.containerAuth {
+  display: flex;
+  justify-content: center;
+}
+
 .toogleBtn {
   width: 500px;
   margin: 30px 120px;
@@ -47,9 +51,9 @@ function toogleHasUser() {
 }
 
 .iHaveAnAccountBtn {
+  width: 480px;
   background-color: gray;
   color: #f2f4fc;
-  width: 495px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -61,13 +65,13 @@ function toogleHasUser() {
 }
 
 .iWantToSignUpBtn {
+  width: 480px;
   display: flex;
   align-items: center; 
   gap: 10px;
   justify-content: center;
   background-color: gray;
   color: #f2f4fc;
-  width: 495px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;

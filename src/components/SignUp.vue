@@ -106,9 +106,9 @@ label {
 }
 
 .submitButton {
+  width: 480px;
   background-color: gray;
   color: #f2f4fc;
-  width: 495px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;
