@@ -1,22 +1,42 @@
 <script setup>
+import { ref } from 'vue'
 import { useTaskStore } from '@/stores/task'
 
+
 const taskStore = useTaskStore()
+const props = defineProps({task: Object})
+const show = ref(false)
+const message = ref('')
+let timer = null
 
-
-const props = defineProps({
-    task: Object
-})
-
-function deleteTask() {
-    taskStore.deleteTask(props.task.id) 
+function showSnackBar(msg) {
+    message.value = msg
+    show.value = true
+}
+function showConfirmation() {
+    showSnackBar('Are you sure you want to delete this task?')
 }
 
+function confirm() {
+  show.value = false
+  deleteTask()
+}
+
+function closeSnackBar() {
+  show.value = false
+}
+
+async function deleteTask() {
+    await taskStore.deleteTask(props.task.id) 
+    await taskStore.fetchTasks()
+}
+// function to mark as complete any task item
 async function completeTask() {
     await taskStore.completeTask(props.task.id, !props.task.is_complete);
-    // await taskStore.fetchTasks();
+    await taskStore.fetchTasks();
 }
 
+// function to open edit modal (EditTaskModal.vue)
 function openEditModal() {
     taskStore.selectedTask = props.task;
   taskStore.openEditModal();
@@ -25,9 +45,9 @@ function openEditModal() {
 </script>
 
 <template>
-  <article class="taskContainer">
+  <article>
     <!-- completed verification - style change -->
-    <section :class=" task.is_complete ? 'completedTask' : 'taskItem' ">
+    <section :class=" task.is_complete ? 'completedTask ' : 'taskItem' ">
             <h2> {{ task.title }}</h2>
             <h3> {{ task.description }}</h3>
             <h4>It will take you {{ task.duration + " min, " }} to do this</h4>
@@ -41,23 +61,27 @@ function openEditModal() {
                 </svg></button>
                 <button class="editBtn" @click="openEditModal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
                 </svg></button>
-                <button type="button" class="deleteBtn" @click="deleteTask"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
+                <button type="button" class="deleteBtn" @click="showConfirmation"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
                 </svg></button>
             </div>
         </section>
+        <div v-if="show" class="snackbar">
+                <p>{{ message }}</p>
+                <button @click="confirm">Confirm</button>
+                <button @click="closeSnackBar">Cancel</button>
+            </div>
+      <SnackBar ref="snackbar"/>
     </article>
+
 </template>
 
 <style scoped>
 
-.taskContainer {
-    display: flex;    
-    /* flex-wrap: wrap; */
-}
 
 .taskItem {
-    width: calc(25% - 20px);
-    margin: 30px 120px;
+   
+    width: 250px;
+    margin: 10px auto;
     text-align: left;
     margin-top: 2%;
     background-color: var(--bg-color);
@@ -65,7 +89,7 @@ function openEditModal() {
     box-shadow: var(--inner-items-box-shadow);
     padding: 10px;
     border-radius: 5px;
-    font-size: small; /* mirar esto y decidir como gesitonarlo */
+    font-size: small;
 }
 
 .taskButtons {
@@ -106,16 +130,43 @@ svg {
 }
 
 .completedTask {
-    width: calc(10% - 10px);
-    margin-top: 10px;
-    margin-right: 0;
+    width: 250px;
+    margin: 30px 10px;
     text-align: left;
-    background-color: green;
+    background-color: rgb(158, 239, 158);
     border: none;
     box-shadow: var(--inner-items-box-shadow);
     padding: 10px;
     border-radius: 5px;
     font-size: small;
-    opacity: 0.3;
+    opacity: 0.30;
+}
+
+.snackbar {
+  /* position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%); */
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--btn-color);
+  opacity: 0.7;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+
+}
+
+.snackbar button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-block-start: 5px;
 }
 </style>

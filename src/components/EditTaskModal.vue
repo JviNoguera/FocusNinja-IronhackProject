@@ -5,15 +5,14 @@ import { storeToRefs } from 'pinia'
 const taskStore = useTaskStore()
 const {selectedTask} = storeToRefs(taskStore)
 
-
-function saveChanges() {
-    console.log("salida datos editados")
-  taskStore.saveEditedTask(selectedTask.value);
+// function to save any changes on any task item
+async function saveChanges() {
+  await taskStore.saveEditedTask(selectedTask.value);
   taskStore.closeEditModal();
-// actualizar la estructura de datos, aunque creo que no hace falta porque se cierra el modal.
   taskStore.fetchTasks();
 }
 
+// function to cancel edition
 function cancelEdit() {
   console.log("edicion cancelada")
   taskStore.closeEditModal();
@@ -22,27 +21,30 @@ function cancelEdit() {
 </script>
 
 <template>
-    <div class="overlay" v-if="taskStore.editModalOpen">
+    
+    <div class="overlay" v-if="taskStore.editModalOpen" @click="cancelEdit">
       <article class="editModalContainer">
-        <div class="editModal" v-if="selectedTask">
+        <!-- if editModalOpen is true, editModal pops, wich allows user to edit task -->
+        <div class="editModal" @click.stop v-if="selectedTask">
         <h2>Edit Task</h2>
+          <!-- this method (.prevent) is used to prevent form from reestarting itself while submitting -->
           <form @submit.prevent="saveChanges">
               <div>
                 <label for="title">Title:</label>
-                <input type="text" id="title" v-model="selectedTask.title" />
+                <input type="text" id="title" v-model="selectedTask.title"/>
               </div>
               <div>
                 <label for="description">Description:</label>
-                <input type="text-area" id="description" v-model="selectedTask.description" ></input>
+                <input type="text-area" id="description" v-model="selectedTask.description"/>
               </div>
               <div class="containerDurationReminder">
                   <div class="duration">
                     <label for="duration">Duration (min):</label>
-                    <input type="number" id="duration" v-model.number="selectedTask.duration" />
+                    <input type="number" id="duration" v-model.number="selectedTask.duration"/>
                   </div>
                   <div class="reminder">
                     <label for="reminder">Reminder:</label>
-                    <input type="datetime-local" id="reminder" v-model="selectedTask.reminder" />
+                    <input type="datetime-local" id="reminder" v-model="selectedTask.reminder"/>
                   </div>
                 </div>
               <div class="buttons">

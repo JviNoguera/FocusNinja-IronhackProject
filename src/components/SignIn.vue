@@ -1,22 +1,27 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { useTaskStore } from '@/stores/task';
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const userStore = useUserStore()
+const taskStore = useTaskStore()
 const email = ref('')
 const password = ref('')
 
 // Check User v2
 async function checkUser() {
   try {
-    await userStore.signIn(email.value, password.value)
+    // estoy haciendo la profile maker y que leyendo justo esto tratandod e descifrar como hacer para traerme el email del usuario
+
+    await userStore.signIn(email.value, password.value) 
     email.value = ''
     password.value = ''
     //if user is authenticated redirect to dashboard
     if (userStore.user) {
       console.log(userStore.user);
+      await taskStore.fetchTasks();
       router.push({ path: '/' })
     } else {
       alert('Are you signed up? Please check your email or password!')

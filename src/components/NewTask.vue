@@ -1,9 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useTaskStore } from '@/stores/task'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const taskStore = useTaskStore()
 
@@ -97,7 +94,8 @@ const handleSubmit = async () => {
 
 .taskMaker {
   width: 500px;
-  margin: 20px;
+  margin: 100px auto;
+  margin-bottom: 0%;
   text-align: left;
   background-color: var(--bg-color);
   border: none;

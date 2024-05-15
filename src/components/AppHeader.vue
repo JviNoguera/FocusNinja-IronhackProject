@@ -1,21 +1,33 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-import { useUserStore } from '@/stores/user.js'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const userStore = useUserStore()
+<script setup>
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useUserStore } from '@/stores/user.js';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const userStore = useUserStore();
+const isMenuOpen = ref(false);
 
 function signOut() {
-    userStore.signOut()
-    router.push({ path: '/auth' })
+    userStore.signOut();
+    router.push({ path: '/auth' });
+}
+
+function toggleMenu() {
+    isMenuOpen.value = !isMenuOpen.value;
 }
 
 </script>
 
 <template>
     <nav class= "navBar">
-        <ul class="navBarFlex">
+        <div class="menu-icon" @click="toggleMenu">
+            <svg>
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <ul v-if="isMenuOpen" class="navBarFlex">
             <li>
               <RouterLink class="navLink" to="/auth">Sign In</RouterLink>
             </li>
@@ -26,6 +38,9 @@ function signOut() {
               <RouterLink class="navLink" to="/profile">Profile</RouterLink>
             </li>
         </ul>
+        <!-- <div>
+        aqui va el reloj del centro 
+        </div> -->
         <div>
             <button class="signOutBtn" type="" @click="signOut">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -45,16 +60,28 @@ function signOut() {
     align-items: center;
     background-color: var(--secondary-bg-color);
     height: 100px;
-    padding-inline: 10px
-}   
-
-.navBarFlex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+    padding-inline: 10px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
 }
+
+.menu-icon {
+    cursor: pointer;
+}
+
+.menu-icon svg {
+    fill: none;
+    width: 24px;
+    height: 24px;
+}
+
+ul { 
+    position: absolute;
+    top: 60%;
+    z-index: 10;
+}
+
 
 li {
     list-style: none;
@@ -102,4 +129,7 @@ svg {
     width: 20px; 
     height: 20px; 
 }
-</style>
+</style> 
+
+
+
