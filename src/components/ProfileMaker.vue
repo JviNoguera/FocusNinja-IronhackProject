@@ -1,76 +1,93 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useProfileStore } from '@/stores/profile'
 import { useUserStore } from '@/stores/user'    
+import { storeToRefs } from 'pinia';
 
 const profileStore = useProfileStore()
+
 const userStore = useUserStore()
+// Get user data from store and let it assign to variables
+const { user } = storeToRefs(userStore);
+const { profiles } = storeToRefs(profileStore);
 
 const name = ref('')
 const username = ref('')
 const website = ref(null)
-// link with user email
-const email = ref(email.value)
+const email = ref('')
 const avatar_url = ref(null)
 
-// la lectura de aqui va en conjunto con la lectura de signin 16
-const checkUser = async () => {
-   await userStore.fetchUser()  
-   if (userStore.user) {
-        email.value = userStore.user.email
-        console.log(email.value)
-        return email.value
-    }
-}
 
-const handleSubmit = async () => {
+const handleSubmit = async () => {      
   await profileStore.addProfile({
     name: name.value,
     username: username.value,
     website: website.value,
     email: email.value,
     avatar_url: avatar_url.value,
-  })
-  // Reset form values after task is added
+  }),
+
+// Reset form values after task is added
     name.value = '' 
     username.value = ''
     website.value = null
-    email.value = ''     
+    email.value = '' 
     avatar_url.value = null
 }
+// Watch for changes in user data to keep email in sync
+watchEffect(() => {
+  if(user.value){
+    email.value = user.value.email
+    console.log(email.value, "log del watchEffect");
+  }
+})
+
 </script>
 
 <template>
-  <div class="profileMaker">
-    <form @submit.prevent="handleSubmit">
-      <div class="name">
-        <label for="titleForm">name</label>
-        <input type="text" id="titleForm"
-          v-model="title" placeholder="hello, my name is"/>
+  <article>
+    <div v-if="profiles">
+      <div>
+        <img :src="profiles.avatar_url" alt="profile pic">
       </div>
-      <div class="username">
-        <label for="descriptionForm">username</label>
-        <input type="text" id="descriptionForm"
-          v-model="description" placeholder="username"/>
-      </div>
-      <div class="website">
-        <label for="descriptionForm">website</label>
-        <input type="text" id="descriptionForm"
-          v-model="description" placeholder="website"/>
-      </div>
-      <div class="email">
-        <label for="descriptionForm">email</label>
-        <input type="text" id="descriptionForm"
-          v-model="description" placeholder="email"/>
-      </div>
-      <section class="avatar">
-        <label for="avatarForm">avatar</label>
-        <input type="text" id="avatarForm"
-          v-model="avatar" placeholder="avatar"/>
-      </section>
-      <button class="submitButton" type="submit">Become a Ninja Task</button>
-    </form>
-  </div>
+      <h2> {{ profiles.name }} </h2>
+      <h2> {{ profiles.username }} </h2>
+      <h2> {{ profiles.website }} </h2>
+      <h2> {{ profiles.email }} </h2>
+    </div>
+  </article>
+  <article>
+    <div class="profileMaker">
+      <form @submit.prevent="handleSubmit">
+        <div class="name">
+          <label for="titleForm">name</label>
+          <input type="text" id="titleForm"
+            v-model="name" placeholder="hello, my name is"/>
+        </div>
+        <div class="username">
+          <label for="descriptionForm">username</label>
+          <input type="text" id="descriptionForm"
+            v-model="username" placeholder="username"/> 
+        </div>
+        <div class="website">
+          <label for="website">website</label>
+          <input type="text" id="website"
+            v-model="website" placeholder="website"/>
+        </div>
+        <div class="email">
+          <label for="email">email</label>
+          <input type="text" id="email"
+            v-model="email"/>
+        </div>
+        <section class="avatar">
+          <label for="avatarForm">avatar</label>
+          <input type="text" id="avatarForm"
+            v-model="avatar_url" placeholder="avatar"/>
+        </section>
+        <button class="submitButton" type="submit">Update your Profile</button>
+      </form>
+    </div>
+  </article>
 </template>
 
 <style scoped>

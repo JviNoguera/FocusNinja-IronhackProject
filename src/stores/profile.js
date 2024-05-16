@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import supabase from '../supabase.js'
 import { useUserStore } from './user.js'
 
-export const useProfileStore = defineStore('profiles', {
+export const useProfileStore = defineStore('profile', {
   state: () => ({
     profiles: null,
   }),
@@ -10,13 +10,19 @@ export const useProfileStore = defineStore('profiles', {
   actions: {
     
     // function to fetch profiles
-    async fetchProfiles() {
+    async fetchProfile() {
       const userId = useUserStore().user.id
-      const { data: fetchedProfiles, error } = await supabase
-        .from('profiles')
+      const { data: fetchedProfile, error } = await supabase
+        .from('profile')
         .select('*')
         .eq('user_id', userId)
         .order('id', { ascending: false })
+
+      if (error) {
+        console.error('Error while fetching profile:', error.message)
+        return
+      }
+      this.profiles = fetchedProfile[0] 
     },
     // function to add new profiles
     async addProfile (profileData) {
@@ -29,7 +35,7 @@ export const useProfileStore = defineStore('profiles', {
 
       if (error) throw error
       else profile
-      await this.fetchProfiles()
+      await this.fetchProfile()
 
     },
 

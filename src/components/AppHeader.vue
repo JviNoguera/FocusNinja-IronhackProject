@@ -1,13 +1,18 @@
 
 <script setup>
-import { ref } from 'vue';
+import { ref} from 'vue';
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
 import { useRouter } from 'vue-router';
+import { useProfileStore } from '@/stores/profile';
+import { storeToRefs } from 'pinia';
 
+const profileStore = useProfileStore();
+const { profiles } = storeToRefs (profileStore);
 const router = useRouter();
 const userStore = useUserStore();
 const isMenuOpen = ref(false);
+
 
 function signOut() {
     userStore.signOut();
@@ -24,8 +29,21 @@ function toggleMenu() {
     <nav class= "navBar">
         <div class="menu-icon" @click="toggleMenu">
             <svg>
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-linecap="butt" stroke-width="3" />
             </svg>
+        </div>
+        <div>
+            <RouterLink class="logo" to="/">
+                <img src="" alt="logo">
+            </RouterLink>
+        </div>
+        <div v-if ="profiles">
+            <RouterLink class="avatar" to="/profile">
+                <img :src= "profiles.avatar_url || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'" alt="Avatar">
+            </RouterLink>
+        </div>
+        <div>
+            clock here
         </div>
         <ul v-if="isMenuOpen" class="navBarFlex">
             <li>
@@ -109,8 +127,8 @@ li {
 
     margin-right: 30px;
     background-color: rgb(188, 22, 22);
-    width: 200px;
-    height: 60px;
+    width: 80px;
+    height: 50px;
     cursor: pointer;
     box-shadow: none;
     outline: none;
@@ -120,7 +138,7 @@ li {
     align-items: center;
     text-decoration: none; 
     opacity: 0.8;
-    box-shadow: rgb(43, 42, 42) 10px 0px 10px;
+    box-shadow: rgb(43, 42, 42) 5px 0px 5px;
     border-radius: var(--border-radius);
 }
 

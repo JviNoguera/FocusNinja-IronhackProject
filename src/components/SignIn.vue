@@ -13,8 +13,6 @@ const password = ref('')
 // Check User v2
 async function checkUser() {
   try {
-    // estoy haciendo la profile maker y que leyendo justo esto tratandod e descifrar como hacer para traerme el email del usuario
-
     await userStore.signIn(email.value, password.value) 
     email.value = ''
     password.value = ''

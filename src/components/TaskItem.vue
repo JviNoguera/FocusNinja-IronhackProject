@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, stop } from 'vue'
 import { useTaskStore } from '@/stores/task'
 
 
@@ -7,13 +7,17 @@ const taskStore = useTaskStore()
 const props = defineProps({task: Object})
 const show = ref(false)
 const message = ref('')
-let timer = null
+
 
 function showSnackBar(msg) {
     message.value = msg
     show.value = true
 }
+// function to delete any task item + auto-closing
 function showConfirmation() {
+    setTimeout(() => {
+        show.value = false
+    }, 7000)
     showSnackBar('Are you sure you want to delete this task?')
 }
 
@@ -47,7 +51,7 @@ function openEditModal() {
 <template>
   <article>
     <!-- completed verification - style change -->
-    <section :class=" task.is_complete ? 'completedTask ' : 'taskItem' ">
+        <section :class=" task.is_complete ? 'completedTask ' : 'taskItem' ">
             <h2> {{ task.title }}</h2>
             <h3> {{ task.description }}</h3>
             <h4>It will take you {{ task.duration + " min, " }} to do this</h4>
@@ -65,16 +69,14 @@ function openEditModal() {
                 </svg></button>
             </div>
         </section>
-        <div v-if="show" class="snackbar">
-                <p>{{ message }}</p>
-                <button @click="confirm">Confirm</button>
-                <button @click="closeSnackBar">Cancel</button>
+            <div v-if="show" class="snackbar, overlay" @click="closeSnackBar">
+                    <p>{{ message }}</p>
+                    <button @click="confirm">Confirm</button>
+                    <button @click="closeSnackBar">Cancel</button>
             </div>
-      <SnackBar ref="snackbar"/>
     </article>
-
 </template>
-
+v-if="show" class="overlay" 
 <style scoped>
 
 
@@ -143,10 +145,6 @@ svg {
 }
 
 .snackbar {
-  /* position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%); */
   width: 250px;
   margin: 0 auto;
   text-align: center;
@@ -156,10 +154,39 @@ svg {
   padding: 10px 20px;
   border-radius: 5px;
   z-index: 1000;
+  position: relative;
+  overflow: hidden;
+}
 
+.snackbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+  animation: darken 7s linear infinite;
+  pointer-events: none; /* Evita que el pseudo-elemento interactue con los elementos que estan superpuestos */
+}
+
+@keyframes darken {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.snackbar p {
+  position: relative;
+  z-index: 1;
 }
 
 .snackbar button {
+  position: relative;
+  z-index: 1;
   margin-left: 10px;
   padding: 5px 10px;
   background-color: white;
@@ -168,5 +195,14 @@ svg {
   border-radius: 5px;
   cursor: pointer;
   margin-block-start: 5px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+
 }
 </style>
