@@ -1,5 +1,5 @@
 <script setup>
-import { ref, stop } from 'vue'
+import { ref } from 'vue'
 import { useTaskStore } from '@/stores/task'
 
 
@@ -49,7 +49,7 @@ function openEditModal() {
 </script>
 
 <template>
-  <article>
+  <article >
     <!-- completed verification - style change -->
         <section :class=" task.is_complete ? 'completedTask ' : 'taskItem' ">
             <h2> {{ task.title }}</h2>
@@ -69,19 +69,18 @@ function openEditModal() {
                 </svg></button>
             </div>
         </section>
-            <div v-if="show" class="snackbar, overlay" @click="closeSnackBar">
-                    <p>{{ message }}</p>
-                    <button @click="confirm">Confirm</button>
-                    <button @click="closeSnackBar">Cancel</button>
-            </div>
     </article>
+    <div v-if="show" class="snackbar" @click.stop>
+      <p>{{ message }}</p>
+      <button @click="confirm">Confirm</button>
+      <button @click="closeSnackBar">Cancel</button>
+    </div>
 </template>
-v-if="show" class="overlay" 
+
 <style scoped>
 
 
 .taskItem {
-   
     width: 250px;
     margin: 10px auto;
     text-align: left;
@@ -140,21 +139,22 @@ svg {
     box-shadow: var(--inner-items-box-shadow);
     padding: 10px;
     border-radius: 5px;
-    font-size: small;
+    font-size: xx-small;
     opacity: 0.30;
 }
 
 .snackbar {
-  width: 250px;
-  margin: 0 auto;
+  width: 100vw;
   text-align: center;
   background-color: var(--btn-color);
-  opacity: 0.7;
+  opacity: 0.9;
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   z-index: 1000;
-  position: relative;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
   overflow: hidden;
 }
 
@@ -196,13 +196,13 @@ svg {
   cursor: pointer;
   margin-block-start: 5px;
 }
-
+/* 
 .overlay {
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 999;
 
-}
+} */
 </style>

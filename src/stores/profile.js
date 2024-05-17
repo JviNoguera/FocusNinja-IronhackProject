@@ -23,6 +23,8 @@ export const useProfileStore = defineStore('profile', {
         return
       }
       this.profiles = fetchedProfile[0] 
+      // if there is no avatar_url set, set it to default
+      if(!this.profiles.avatar_url) this.profiles.avatar_url = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
     },
     // function to add new profiles
     async addProfile (profileData) {

@@ -3,7 +3,6 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from './stores/user.js'
 import { useTaskStore } from './stores/task.js'
-import AuthView from './views/AuthView.vue'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from './stores/profile.js'
 
@@ -33,9 +32,17 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section>
-    <router-view></router-view>
-  </section>
+  <div>
+    <section>
+      <router-view class="sized"></router-view>
+    </section>
+    <AppFooter />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.sized{
+  min-height: 90vh;
+}
+</style>

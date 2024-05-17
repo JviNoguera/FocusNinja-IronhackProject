@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import SignUp from '@/components/SignUp.vue'
 import SignIn from '@/components/SignIn.vue'
+import AppFooter from '@/components/AppFooter.vue';
 
 
 const hasUser = ref(true)
@@ -12,7 +13,7 @@ function toogleHasUser() {
 </script>
 
 <template>
-  <section class="containerAuth">
+  <section class="containerAuth sized">
     <h1 hidden>Auth-View</h1>
     <article v-if="hasUser">
       <SignIn /> <div class="toogleBtn">
@@ -29,9 +30,14 @@ function toogleHasUser() {
       </div>
     </article>
   </section>
+  <AppFooter/>
 </template>
 
 <style scoped>
+
+.sized {
+  height: 90vh;
+}
 
 .containerAuth {
   display: flex;
