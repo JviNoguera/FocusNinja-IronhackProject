@@ -34,6 +34,7 @@ async function checkUser() {
 
 <template>
   <section class="containerSignIn">
+    <img src="/src/assets/Focus_Ninja-removebg-preview.png" alt="">
     <form @submit.prevent="checkUser">
       <div class="signIn">
         <div class="email">
@@ -59,13 +60,22 @@ async function checkUser() {
 .containerSignIn {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+  margin-top: 5%;
+
 }
 
 .signIn {
   width: 500px;
   margin: 30px 120px;
   text-align: left;
-  margin-top: 40%;
+  margin-top: 5%;
   background-color: whitesmoke;
   border: none;
   box-shadow: gray 0px 0px 10px;
@@ -125,6 +135,10 @@ label {
   margin-block-start: 20px;
   margin-bottom: 5px;
   border-radius: 5px;
+}
+
+.submitButton:hover {
+    background-color: rgba(20, 19, 19, 0.757);
 }
 
 </style>

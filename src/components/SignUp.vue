@@ -118,4 +118,8 @@ label {
   margin-bottom: 5px;
 }
 
+.submitButton:hover {
+    background-color: rgba(20, 19, 19, 0.757);
+}
+
 </style>

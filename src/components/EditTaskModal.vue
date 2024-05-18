@@ -21,7 +21,6 @@ function cancelEdit() {
 </script>
 
 <template>
-    
     <div class="overlay" v-if="taskStore.editModalOpen" @click="cancelEdit">
       <article class="editModalContainer">
         <!-- if editModalOpen is true, editModal pops, wich allows user to edit task -->
@@ -59,6 +58,11 @@ function cancelEdit() {
 
 <style scoped>
 
+h2  {
+    font-size: 30px;
+    text-align: center;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -67,27 +71,31 @@ function cancelEdit() {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .editModal {
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     margin: 20% auto;
     padding: 10px;
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 input {
-  background: gainsboro;
+    background: gainsboro;
 }
 
 label {
-  color: var(--btn-color);
-  font-size: 18px;
-  margin-left: 5px;
-  font-weight: 500;
+    color: var(--btn-color);
+    font-size: 18px;
+    margin-left: 5px;
+    font-weight: 500;
 }
 
 .editModal input,
@@ -106,40 +114,42 @@ label {
 }
 
 .containerDurationReminder {
-  display: flex;
-  width: 480px;
-  justify-content: space-between;
-  margin-top: 15px;
+    display: flex;
+    width: 480px;
+    justify-content: space-between;
+    margin-top: 15px;
 }
 
 .duration select {
-  color: var(--text-color);
+    color: var(--text-color);
 }
 
 .containerDurationReminder div {
-  width: 48%;
+    width: 50%;
 }
 
 .containerDurationReminder {
-  display: flex;
-  width: 480px;
-  justify-content: space-between;
-  margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+    gap: 10px;
 }
 
 .duration select {
-  color: var(--text-color);
+    color: var(--text-color);
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .buttons button {
-  width: 48%;
+    width: 48%;
 }
+
  .submitBtn {
     background-color: rgb(187, 187, 42);
     opacity: 0.7;
@@ -153,7 +163,7 @@ label {
 }
 
  .cancelBtn {
-  background-color: rgb(187, 40, 42);
+    background-color: rgb(187, 40, 42);
     opacity: 0.7;
     color: var(--btn-text-color);
     border: none;
@@ -164,7 +174,10 @@ label {
 }
 
  .submitBtn:hover {
-  background-color: rgb(187, 187, 42);
-    opacity: 0.7;
+    background-color: rgb(227, 227, 17);
+}
+
+.cancelBtn:hover {
+    background-color: rgb(229, 13, 16);
 }
 </style>

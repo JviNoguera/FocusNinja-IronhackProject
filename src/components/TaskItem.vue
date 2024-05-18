@@ -13,7 +13,11 @@ function showSnackBar(msg) {
     message.value = msg
     show.value = true
 }
-// function to delete any task item + auto-closing
+
+function closeSnackBar() {
+  show.value = false
+}
+// function to show the delete confirmation
 function showConfirmation() {
     setTimeout(() => {
         show.value = false
@@ -26,14 +30,11 @@ function confirm() {
   deleteTask()
 }
 
-function closeSnackBar() {
-  show.value = false
-}
-
 async function deleteTask() {
     await taskStore.deleteTask(props.task.id) 
     await taskStore.fetchTasks()
 }
+
 // function to mark as complete any task item
 async function completeTask() {
     await taskStore.completeTask(props.task.id, !props.task.is_complete);
@@ -51,96 +52,130 @@ function openEditModal() {
 <template>
   <article >
     <!-- completed verification - style change -->
-        <section :class=" task.is_complete ? 'completedTask ' : 'taskItem' ">
-            <h2> {{ task.title }}</h2>
-            <h3> {{ task.description }}</h3>
-            <h4>It will take you {{ task.duration + " min, " }} to do this</h4>
-            <div v-if = "task.reminder !== null">
-                <h4 > You're supposed to start at:</h4>
-                <p> {{ task.reminder }}</p>
-            </div>
-            <div class="taskButtons">
-                <button type="button" class="completeBtn" @click="completeTask"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/>
-                </svg></button>
-                <button class="editBtn" @click="openEditModal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
-                </svg></button>
-                <button type="button" class="deleteBtn" @click="showConfirmation"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
-                </svg></button>
-            </div>
-        </section>
-    </article>
-    <div v-if="show" class="snackbar" @click.stop>
-      <p>{{ message }}</p>
-      <button @click="confirm">Confirm</button>
-      <button @click="closeSnackBar">Cancel</button>
-    </div>
+    <section :class="task.is_complete ? 'completedTask' : 'taskItem'">
+      <h2>{{ task.title }}</h2>
+      <h3>{{ task.description }}</h3>
+      <h4>It will take you {{ task.duration + " min, " }} to do this</h4>
+      <div v-if="task.reminder !== null">
+        <h4>You're supposed to start at:</h4>
+        <p>{{ task.reminder }}</p>
+      </div>
+      <div class="taskButtons">
+        <button class="kebabBtn completeBtn" aria-label="Mark as Complete" @click="completeTask">•</button>
+        <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
+        <button class="kebabBtn editBtn" aria-label="Edit this task" @click="openEditModal">•</button>
+      </div>
+      <div class="completeButtons" v-if="task.is_complete">
+        <button class="kebabBtn moveToPendingBtn" aria-label="Move to pending tasks" @click="completeTask">•</button>
+        <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
+      </div>
+    </section>
+  </article>
+  <div v-if="show" class="snackbar" @click.stop>
+    <p>{{ message }}</p>
+    <button @click="confirm">Confirm</button>
+    <button @click="closeSnackBar">Cancel</button>
+  </div>
 </template>
 
 <style scoped>
 
-
 .taskItem {
     width: 250px;
-    margin: 10px auto;
     text-align: left;
-    margin-top: 2%;
     background-color: var(--bg-color);
     border: none;
     box-shadow: var(--inner-items-box-shadow);
     padding: 10px;
-    border-radius: 5px;
-    font-size: small;
+    border-radius: 10px;
+    font-size: x-small;
+    position: relative; /* Agregamos posición relativa para los botones */
 }
 
 .taskButtons {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    
 }
 
-.taskButtons button {
-    width: 30px;
-    height: 30px;
-    border-radius: 30%;
-    cursor: pointer;
-    box-shadow: rgb(43, 42, 42) 5px 0px 10px;
-    border: solid 1px rgb(150, 147, 147);
+.completeButtons {
+    position: relative; 
+    top: 0px; 
+    right: 0px; 
+    display: flex;
+    justify-content: end;
+}
+
+
+.kebabBtn {
+  margin: none;
+  width: 30px; 
+  height: 30px; 
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--btn-text-color); /* Color gris para los puntos */
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  position: relative; /* Agregamos posición relativa */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kebabBtn:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Cambia el color de fondo al pasar el cursor sobre el botón */
+}
+
+.kebabBtn[aria-label]:hover::before {
+  content: attr(aria-label);
+  position: absolute;
+  top: -30px; /* Ajustamos la posición vertical para que esté sobre el botón */
+  left: 50%; /* Ajustamos la posición horizontal para que esté centrado */
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0; /* Inicialmente oculto */
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.kebabBtn:hover[aria-label]:hover::before {
+  opacity: 1; /* Mostrar el texto del hover al pasar el cursor */
 }
 
 .completeBtn {
-    background-color: rgb(36, 187, 42);
-    opacity: 0.7;
-}   
+  color: #4CAF50;
+}
 
 .deleteBtn {
-    background-color: rgb(187, 40, 42);
-    opacity: 0.7;
+  color: #f44336;
 }
 
 .editBtn {
-    background-color: rgb(187, 187, 42);
-    opacity: 0.7;
-}
-
-svg {
-    fill: rgb(250, 250, 250);
-    width: 10px; 
-    height: 10px; 
+  color: #ffeb3b;
 }
 
 .completedTask {
-    width: 250px;
-    margin: 30px 10px;
+    width: 200px;
     text-align: left;
-    background-color: rgb(158, 239, 158);
+    background-color: rgb(171, 226, 171);
     border: none;
     box-shadow: var(--inner-items-box-shadow);
     padding: 10px;
     border-radius: 5px;
     font-size: xx-small;
-    opacity: 0.30;
+    margin-bottom: 5px;
+    
 }
 
 .snackbar {
@@ -196,13 +231,4 @@ svg {
   cursor: pointer;
   margin-block-start: 5px;
 }
-/* 
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-
-} */
 </style>

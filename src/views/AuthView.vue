@@ -35,6 +35,10 @@ function toogleHasUser() {
 
 <style scoped>
 
+template {
+  padding-bottom: 10vh; /* Espacio para el footer */
+}
+
 .sized {
   height: 90vh;
 }
@@ -86,6 +90,10 @@ function toogleHasUser() {
   margin-block-start: 8px;
   margin-bottom: 8px;
   border-radius: 5px;
+}
+.iWantToSignUpBtn:hover,
+.iHaveAnAccountBtn:hover {
+    background-color: rgba(20, 19, 19, 0.757);
 }
 
 svg {

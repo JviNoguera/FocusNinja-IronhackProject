@@ -8,6 +8,7 @@ import AppHeader from '@/components/AppHeader.vue'
 import EditTaskModal from '@/components/EditTaskModal.vue'
 import AppFooter from '@/components/AppFooter.vue'
 
+
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
@@ -39,23 +40,34 @@ const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_compl
 </template>
 
 <style scoped>
+
+template {
+  padding-bottom: 10vh; /* Espacio para el footer */
+}
+
 .tasks-order {
   margin-top: 220px;
   min-height: 70vh;
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
 }
 
 .incompleteTasks {
-  width: 70%;
+  width: 65%;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 .completedTasks {
-  width: 30%;
+  width: 35%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
 }
 
 

@@ -161,6 +161,10 @@ li {
     box-shadow:  rgb(99, 97, 97) 4px 0px 4px;
 }
 
+.navLink:hover {
+    background-color: rgba(20, 19, 19, 0.757);
+}
+
 .appLogo {
     margin-left: 30px;
     text-decoration: none;
@@ -182,6 +186,10 @@ li {
     opacity: 0.8;
     box-shadow: rgb(43, 42, 42) 5px 0px 5px;
     border-radius: var(--border-radius);
+}
+
+.signOutBtn:hover {
+    background-color: rgb(229, 13, 16);
 }
 
 svg {

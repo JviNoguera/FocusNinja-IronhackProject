@@ -60,27 +60,27 @@ watchEffect(() => {
     <div class="profileMaker">
       <form @submit.prevent="handleSubmit">
         <div class="name">
-          <label for="nameForm">name</label>
+          <label for="nameForm">Name</label>
           <input type="text" id="nameForm"
             v-model="name" placeholder="hello, my name is"/>
         </div>
         <div class="username">
-          <label for="usernameForm">username</label>
+          <label for="usernameForm">Username</label>
           <input type="text" id="usernameForm"
             v-model="username" placeholder="username"/> 
         </div>
         <div class="website">
-          <label for="websiteForm">website</label>
+          <label for="websiteForm">Website</label>
           <input type="text" id="websiteForm"
             v-model="website" placeholder="website"/>
         </div>
         <div class="email">
-          <label for="emailForm">email</label>
+          <label for="emailForm">e-mail</label>
           <input type="text" id="emailForm"
             v-model="email"/>
         </div>
         <section class="avatar">
-          <label for="avatarForm">avatar</label>
+          <label for="avatarForm">Avatar</label>
           <input type="text" id="avatarForm"
             v-model="avatar_url" placeholder="avatar"/>
         </section>
@@ -109,6 +109,7 @@ watchEffect(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 /* aqui poner la tarjeta de perfil */
@@ -121,6 +122,8 @@ watchEffect(() => {
   border: none;
   box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
+  
+
 }
 
 input {
@@ -216,6 +219,10 @@ label {
   margin-block-start: 20px;
   margin-bottom: 5px;
   margin-top: 30px;
+}
+
+.submitButton:hover {
+    background-color: rgba(20, 19, 19, 0.757);
 }
 
 </style>

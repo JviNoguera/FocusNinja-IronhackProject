@@ -6,21 +6,18 @@ import AppFooter from '@/components/AppFooter.vue';
 </script>
 
 <template>
-    <article class="sized">
-     <AppHeader/>
-    <div>
-        <h1>Profile</h1>
-        <p>This is the profile page</p>
-    </div>
-    <div>
-        <ProfileMaker/>
-    </div>
-    </article>
-    <AppFooter/>
+    <AppHeader/>
+        <article class="sized">
+            <div>
+                <ProfileMaker/>
+            </div>
+        </article>
+    <AppFooter class="footer"/>
 </template>
 
 <style scoped>
 .sized {
-  height: 90vh;
+  padding-bottom: 10vh;
 }
+
 </style>

@@ -105,6 +105,7 @@ function toggleTaskMaker() {
   padding: 20px;
   display: flex;
   justify-content: center;
+  z-index: 1;
   
 }
 
@@ -119,6 +120,10 @@ function toggleTaskMaker() {
   border-style: none;
 }
 
+.taskMakerMenu-btn:hover {
+    background-color: rgba(20, 19, 19, 0.757);
+}
+
 .taskMaker {
   position: fixed;
   top: 230px;
@@ -128,6 +133,7 @@ function toggleTaskMaker() {
   background-color: whitesmoke;
   box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
+  z-index: 1;
 }
 
 input {
@@ -232,5 +238,9 @@ label {
   margin-block-start: 20px;
   margin-bottom: 5px;
   margin-top: 30px;
+}
+
+.submitButton:hover {
+    background-color: rgba(20, 19, 19, 0.757);
 }
 </style>
