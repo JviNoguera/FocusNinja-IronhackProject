@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
     <div class='clock'>
-      <span>{{ hours }}</span> : <span>{{ minutes }}</span> : <span>{{ seconds }}</span>
+      <span>{{ hours }}</span> : <span>{{ minutes }}</span> 
     </div>
 </template>
   
@@ -33,21 +33,25 @@ onMounted(() => {
     width: 320px;
     font-family: orbitron;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
-    color: var(--text-color);
-    opacity: 0.4;
+    color: white;
+    opacity: 0.6;
   }
 
   .clock span {
-    max-width: 60px;
-    font-family: orbitron;
-    font-weight: 700;
-    display: inline-block;
-    font-size: 40px;
-    color: var(--text-color);
-    opacity: 0.8;
-   /* recordar poner retroilumnicacion dependiendo del color del fondo final*/
-  }
+  max-width: 60px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  display: inline-block;
+  font-size: 35px;
+  color: white;
+  text-shadow: 
+    0 0 5px var(--btn-hover-color), 
+    0 0 10px var(--btn-hover-color), 
+    0 0 15px var(--btn-hover-color), 
+    0 0 20px var(--btn-hover-color), 
+    0 0 40px var(--btn-hover-color);
+}
 
   </style>

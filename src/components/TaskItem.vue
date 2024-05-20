@@ -65,9 +65,12 @@ function openEditModal() {
         <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
         <button class="kebabBtn editBtn" aria-label="Edit this task" @click="openEditModal">•</button>
       </div>
-      <div class="completeButtons" v-if="task.is_complete">
-        <button class="kebabBtn moveToPendingBtn" aria-label="Move to pending tasks" @click="completeTask">•</button>
-        <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
+      <div class="completeButtons-container" v-if="task.is_complete">
+        <p>COMPLETED</p>
+        <div class="KebabBtnComplete">
+          <button class="kebabBtn moveToPendingBtn" aria-label="Move to pending tasks" @click="completeTask">•</button>
+          <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
+        </div>
       </div>
     </section>
   </article>
@@ -92,22 +95,25 @@ function openEditModal() {
     position: relative; /* Agregamos posición relativa para los botones */
 }
 
+.taskItem:hover {
+ box-shadow: var(--special-box-shadow);
+}
+
 .taskButtons {
-    position: absolute; 
-    top: 0px; 
-    right: 0px; 
-    display: flex;
+  position: absolute; 
+  top: 0px; 
+  right: 0px; 
+  display: flex;
 }
 
 .completeButtons {
-    position: relative; 
-    top: 0px; 
-    right: 0px; 
-    display: flex;
-    justify-content: end;
+  position: relative; 
+  top: 0px; 
+  right: 0px; 
+  display: flex;
+  justify-content: end;
 }
-
-
+ 
 .kebabBtn {
   margin: none;
   width: 30px; 
@@ -165,17 +171,45 @@ function openEditModal() {
   color: #ffeb3b;
 }
 
+.moveToPendingBtn {
+  color: var(--label-color);
+}
+
+.completeButtons-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.completeButtons-container p{
+  color: var(--bg-color);
+  font-size: 16px;
+  font-weight: 700;
+
+}
+
+.KebabBtnComplete {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .completedTask {
-    width: 200px;
-    text-align: left;
-    background-color: rgb(171, 226, 171);
-    border: none;
-    box-shadow: var(--inner-items-box-shadow);
-    padding: 10px;
-    border-radius: 5px;
-    font-size: xx-small;
-    margin-bottom: 5px;
-    
+  width: 200px;
+  text-align: left;
+  background-color:var(--special-completed-color);
+  border: none;
+  box-shadow: var(--inner-items-box-shadow);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: xx-small;
+  color: var(--label-color);
+  
+}
+
+.completedTask:hover {
+  box-shadow: var(--special-box-shadow);
 }
 
 .snackbar {
@@ -183,7 +217,7 @@ function openEditModal() {
   text-align: center;
   background-color: var(--btn-color);
   opacity: 0.9;
-  color: white;
+  color: var(--bg-color);
   padding: 10px 20px;
   border-radius: 5px 5px 0 0;
   z-index: 1000;

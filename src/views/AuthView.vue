@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import SignUp from '@/components/SignUp.vue'
 import SignIn from '@/components/SignIn.vue'
-import AppFooter from '@/components/AppFooter.vue';
 
 
 const hasUser = ref(true)
@@ -13,7 +12,7 @@ function toogleHasUser() {
 </script>
 
 <template>
-  <section class="containerAuth sized">
+  <section class="containerAuth">
     <h1 hidden>Auth-View</h1>
     <article v-if="hasUser">
       <SignIn /> <div class="toogleBtn">
@@ -30,18 +29,9 @@ function toogleHasUser() {
       </div>
     </article>
   </section>
-  <AppFooter/>
 </template>
 
 <style scoped>
-
-template {
-  padding-bottom: 10vh; /* Espacio para el footer */
-}
-
-.sized {
-  height: 90vh;
-}
 
 .containerAuth {
   display: flex;
@@ -53,20 +43,20 @@ template {
   margin: 30px 120px;
   text-align: left;
   margin-top: 2%;
-  background-color: whitesmoke;
+  background-color: var(--bg-color);
   border: none;
-  box-shadow: gray 0px 0px 10px;
+  box-shadow:var(--regular-box-shadow);
   padding: 10px;
   border-radius: 5px;
+  margin-bottom: 10%;
 }
 
 .iHaveAnAccountBtn {
   width: 480px;
-  background-color: gray;
-  color: #f2f4fc;
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
   height: 70px;
   cursor: pointer;
-  box-shadow: none;
   outline: none;
   border-style: none;
   margin-block-start: 8px;
@@ -80,11 +70,10 @@ template {
   align-items: center; 
   gap: 10px;
   justify-content: center;
-  background-color: gray;
-  color: #f2f4fc;
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
   height: 70px;
   cursor: pointer;
-  box-shadow: none;
   outline: none;
   border-style: none;
   margin-block-start: 8px;
@@ -93,11 +82,11 @@ template {
 }
 .iWantToSignUpBtn:hover,
 .iHaveAnAccountBtn:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color: var(--btn-hover-color);
 }
 
 svg {
-    fill: gainsboro;
+    fill: var(--btn-text-color);
     width: 20px; 
     height: 20px; 
 }

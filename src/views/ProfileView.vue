@@ -7,17 +7,13 @@ import AppFooter from '@/components/AppFooter.vue';
 
 <template>
     <AppHeader/>
-        <article class="sized">
+        <article>
             <div>
                 <ProfileMaker/>
             </div>
         </article>
-    <AppFooter class="footer"/>
 </template>
 
 <style scoped>
-.sized {
-  padding-bottom: 10vh;
-}
 
 </style>

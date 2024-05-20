@@ -1,16 +1,29 @@
-
+/* main previo a los cambios de color */
 @import "https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap"; /* Clock's font */
 @import "https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap";
 
 :root {
-    --bg-color: whitesmoke;
-    --secondary-bg-color: gainsboro;
-    --btn-color: gray;
+    /* rgb(242, 198, 28, 0.8) */
+    --bg-color: white;
+    --secondary-bg-color: gainsboro ;
+    --btn-color: rgb(138, 43, 226, 0.7);
+    --btn-hover-color:  rgb(138, 43, 226);
+    --label-color: rgb(138, 44, 226);
+    --special-completed-color:  rgb(138, 44, 226, 0.2);
+    --negative-action: rgb(188, 22, 22, 0.8);
     --btn-text-color: whitesmoke;
-    --text-color: gray;
+    --text-color: rgb(13, 11, 34);
+    --secondary-text-color: gainsboro;
     --border-radius: 5px;
+    --regular-box-shadow: 0 0 5px 0 gray;
     --inner-items-box-shadow: gray 0px 0px 10px;
+    --special-box-shadow: 0px 0px 10px rgb(138, 44, 226);
     --primary-font: 'Rubik', sans-serif;
+    --negative-action: rgb(188, 22, 22, 0.8);
+    --edit-action: rgb(187, 187, 42, 0.8);
+    --complete-action: rgb(42, 187, 42, 0.8);
+    --modal-shadow-color-light: 0 0 20px rgba(0, 0, 0, 0.1);
+    --modal-overlay-color: rgba(0, 0, 0, 0.5);
     
 }
 
@@ -20,6 +33,7 @@
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
     border-radius: var(--border-radius);
+    
 }
 
 h1, h2, h3, h4, h5, h6 {

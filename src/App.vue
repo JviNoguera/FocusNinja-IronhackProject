@@ -5,12 +5,14 @@ import { useUserStore } from './stores/user.js'
 import { useTaskStore } from './stores/task.js'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from './stores/profile.js'
+import AppFooter from './components/AppFooter.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
 const taskStore = useTaskStore()
 const { user } = storeToRefs(userStore)
 const profileStore = useProfileStore()
+
 
 
 

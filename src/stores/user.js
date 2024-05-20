@@ -32,6 +32,7 @@ export const useUserStore = defineStore('user', {
       });
       if (error) throw error;
       if (user) this.user = user;
+      
     },
     // function to sign out the user
     async signOut() {

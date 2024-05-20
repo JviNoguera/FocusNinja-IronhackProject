@@ -121,27 +121,27 @@ function toggleTaskMaker() {
 }
 
 .taskMakerMenu-btn:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color:var(--btn-hover-color);
 }
 
 .taskMaker {
   position: fixed;
   top: 230px;
-  left: 50%; /* Centra horizontalmente */
-  transform: translateX(-50%); /* Centra horizontalmente */
+  left: 50%; 
+  transform: translateX(-50%);
   width: 500px;
-  background-color: whitesmoke;
   box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
   z-index: 1;
+  background-color: var(--bg-color);
 }
 
 input {
-  background: gainsboro;
+  background: var(--secondary-bg-color);
 }
 
 label {
-  color: var(--btn-color);
+  color: var(--label-color);
   font-size: 18px;
   margin-left: 5px;
   font-weight: 500;
@@ -214,7 +214,7 @@ label {
 
 #reminderForm {
   margin-right: 10px;
-  width: 100%; /* esto no es correcto */
+  width: 100%;
   border: none;
   background-color: var(--secondary-bg-color);
   height: 60px;
@@ -241,6 +241,6 @@ label {
 }
 
 .submitButton:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color: var(--btn-hover-color);
 }
 </style>

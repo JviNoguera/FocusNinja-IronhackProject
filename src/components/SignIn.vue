@@ -76,19 +76,19 @@ img {
   margin: 30px 120px;
   text-align: left;
   margin-top: 5%;
-  background-color: whitesmoke;
+  background-color: var(--bg-color);
   border: none;
-  box-shadow: gray 0px 0px 10px;
+  box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
   border-radius: 5px;
 }
 
 input {
-  background: gainsboro;
+  background: var(--secondary-bg-color);
 }
 
 label {
-  color: grey;
+  color: var(--label-color);
   font-size: 14px;
   margin-left: 5px;
 }
@@ -101,7 +101,7 @@ label {
 #email {
   width: 480px;
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
@@ -116,7 +116,7 @@ label {
 #password {
   width: 480px;
   border: none;
-  background-color: gainsboro;
+  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
@@ -125,8 +125,8 @@ label {
 
 .submitButton {
   width: 480px;
-  background-color: gray;
-  color: #f2f4fc;
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -138,7 +138,7 @@ label {
 }
 
 .submitButton:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+  background-color: var(--btn-hover-color);
 }
 
 </style>

@@ -131,7 +131,7 @@ input {
 }
 
 label {
-  color: var(--btn-color);
+  color: var(--label-color);
   font-size: 18px;
   margin-left: 5px;
   font-weight: 500;

@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import AuthView from '@/views/AuthView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import ConfirmationView from '@/views/ConfirmationView.vue'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,13 +23,18 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfileView
-    }
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: ConfirmationView
+    },
 
-    // {
-    //   path: '/:pathMatch(.*)*',
-    //     name: 'NotFound',
-    //     component: NotFoundView (sin crear),
-    // }
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFoundView
+    }
   ]
 })
 

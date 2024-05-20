@@ -8,9 +8,9 @@ import { RouterLink } from 'vue-router';
       <div class="footer-left">
         <nav class="footer-nav">
           <ul>
-            <li><RouterLink to="/auth">Sign In</RouterLink></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Contact us</a></li>
+            <li><a href="/auth">Sign in</a></li>
+            <li><a href="/aboutus">About us</a></li>
+            <li><a href="/contactus">Contact us</a></li>
             <!-- Otros enlaces de navegación -->
           </ul>
         </nav>
@@ -24,20 +24,19 @@ import { RouterLink } from 'vue-router';
       </div>
       <div class="footer-right">
         <div class="social-links">
-          <a href="#" class="social-icon">Facebook</a>
-          <a href="#" class="social-icon">Twitter</a>
-          <a href="#" class="social-icon">Instagram</a>
-          <!-- Otros enlaces a redes sociales -->
+          <RouterLink class="social-icon" to='/:pathMatch(.*)*'>Facebook</RouterLink>
+          <RouterLink class="social-icon" to='/:pathMatch(.*)*'>Twitter</RouterLink>
+          <RouterLink class="social-icon" to='/:pathMatch(.*)*'>Instagram</RouterLink>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="legal-left">
-        <a href="#">Privacy Policy</a>
+        <a href="/privacy">Privacy Policy</a>
       </div>
       <p class="copyright">© 2024 Ninja Tasker Inc. All rights reserved.</p>
       <div class="legal-right">
-        <a href="#">Terms of Use</a>
+        <a href="/termsofuse">Terms of Use</a>
       </div>
     </div>
   </footer>
@@ -45,13 +44,17 @@ import { RouterLink } from 'vue-router';
 
 <style scoped>
 
+
 .site-footer {
   width: 100vw;
-  background-color: var(--secondary-bg-color);
+  height: 100px;
+  background-color: var(bg-color);
   padding: 15px;
+  padding-bottom: 5px;
   text-align: center;
   font-size: smaller;
-  height: 10vh;
+  box-shadow: var(--regular-box-shadow);
+  
 }
 
 .footer-content {
@@ -93,11 +96,11 @@ import { RouterLink } from 'vue-router';
   display: inline-block;
   margin-right: 10px;
   text-decoration: none;
-  color: #333;
+  color: var(--text-color);
 }
 
 .social-icon:hover {
-  color: #007bff;
+  color: var(--text-color);
 }
 
 .footer-bottom {
@@ -115,11 +118,11 @@ import { RouterLink } from 'vue-router';
 
 .legal-links a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-color);
 }
 
 .legal-links a:hover {
-  color: #007bff;
+  color: var(--text-color);
 }
 
 .copyright {

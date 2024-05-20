@@ -28,7 +28,7 @@ function toggleMenu() {
 </script>
 
 <template>
-    <nav class= "navBar">
+    <nav class= "navBar" >
         <div class="navBar-left">
             <div class="menu-icon" @click="toggleMenu">
                 <svg>
@@ -49,7 +49,7 @@ function toggleMenu() {
                     </ul>
                 </div>
             <RouterLink class="appLogo" to="/">
-                <img src="" alt="logo">
+                <img src="/src/assets/Focus_Ninja-removebg-preview.png" alt="logo">
             </RouterLink>
         </div>
         <div class="navBar-center">
@@ -88,6 +88,8 @@ function toggleMenu() {
     z-index: 10;
     padding-left: 20px;
     padding-right: 20px;
+    box-sizing:inherit;
+    box-shadow:var(--regular-box-shadow);
 }
 
 .navBar-left,
@@ -121,6 +123,7 @@ function toggleMenu() {
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: rgb(43, 42, 42) 2px 0px 3px;
 }
 
 .menu-icon {
@@ -131,6 +134,12 @@ function toggleMenu() {
     fill: none;
     width: 24px;
     height: 24px;
+    color: var(--btn-color);
+}
+
+.appLogo img{
+    width: 50px;
+    height: 50px;
 }
 
 ul { 
@@ -145,8 +154,8 @@ li {
 }
 
 .navLink {
-    background-color: var(--btn-color);
-    color: var(--btn-text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     width: 200px;
     height: 60px;
     cursor: pointer;
@@ -158,11 +167,12 @@ li {
     align-items: center;
     text-decoration: none; 
     border-radius: var(--border-radius);
-    box-shadow:  rgb(99, 97, 97) 4px 0px 4px;
+    box-shadow: var(--regular-box-shadow);
 }
 
 .navLink:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color: var(--btn-color);
+    color: var(--btn-text-color);
 }
 
 .appLogo {
@@ -170,10 +180,12 @@ li {
     text-decoration: none;
 }
 
+
 .signOutBtn {
+    
     margin-right: 10px;
-    background-color: rgb(188, 22, 22);
-    width: 80px;
+    background-color:  var(--btn-color);
+    width: 50px;
     height: 50px;
     cursor: pointer;
     box-shadow: none;
@@ -183,13 +195,12 @@ li {
     justify-content: center;
     align-items: center;
     text-decoration: none; 
-    opacity: 0.8;
-    box-shadow: rgb(43, 42, 42) 5px 0px 5px;
-    border-radius: var(--border-radius);
+    box-shadow: rgb(43, 42, 42) 3px 0px 5px;
+    border-radius: 50%;
 }
 
 .signOutBtn:hover {
-    background-color: rgb(229, 13, 16);
+    background-color: var(--btn-hover-color);
 }
 
 svg {

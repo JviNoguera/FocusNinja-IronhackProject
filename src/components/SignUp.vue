@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const userStore = useUserStore();
 const email = ref('');
@@ -8,10 +10,12 @@ const password = ref('');
 const confirmPassword = ref('');
 
 function signUp () {
-    if (password.value === confirmPassword.value)
+    if (password.value === confirmPassword.value) {
         userStore.signUp(email.value, password.value)
-    else
-        alert('Passwords do not match or are empty!')
+        router.push ({ path: '/confirmation' }) 
+    } else
+        alert('Passwords do not match or are empty!');
+  
 }
 
 </script>
@@ -21,15 +25,15 @@ function signUp () {
         <div class="signUp">
             <div class="email">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" v-model="email" placeholder="introduce your e-mail: taskninja@example.com">
+                <input type="email" id="email" v-model="email" placeholder="introduce your e-mail: taskninja@example.com" required> 
             </div>
             <div class="password">
                 <label for="password">Password</label>
-                <input type="password" id="password" v-model="password" placeholder="Introduce your password">
+                <input type="password" id="password" v-model="password" placeholder="Introduce your password" required>
             </div>
             <div class="confirmPassword">
                 <label for="password">Confirm Password</label>
-                <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Please confirm your password">
+                <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Please confirm your password" required>
             </div>
             <div>
                 <button class="submitButton" type="submit"> Let's get started!</button>

@@ -69,7 +69,7 @@ h2  {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--modal-overlay-color);
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -83,12 +83,12 @@ h2  {
     padding: 10px;
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--modal-shadow-color-light);
     padding: 20px;
 }
 
 input {
-    background: gainsboro;
+    background: var(--secondary-bg-color);
 }
 
 label {
@@ -159,11 +159,10 @@ label {
     padding: 15px;
     cursor: pointer;
     font-size: 18px;
-    transition: background-color 0.3s ease;
 }
 
  .cancelBtn {
-    background-color: rgb(187, 40, 42);
+    background-color: var(--negative-action);
     opacity: 0.7;
     color: var(--btn-text-color);
     border: none;
@@ -174,10 +173,10 @@ label {
 }
 
  .submitBtn:hover {
-    background-color: rgb(227, 227, 17);
+    background-color: var(--btn-hover-color);
 }
 
 .cancelBtn:hover {
-    background-color: rgb(229, 13, 16);
+    background-color: var(--btn-hover-color);
 }
 </style>

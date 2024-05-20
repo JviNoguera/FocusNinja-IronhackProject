@@ -6,7 +6,6 @@ import NewTask from '@/components/NewTask.vue'
 import TaskItem from '@/components/TaskItem.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import EditTaskModal from '@/components/EditTaskModal.vue'
-import AppFooter from '@/components/AppFooter.vue'
 
 
 const taskStore = useTaskStore()
@@ -17,7 +16,7 @@ const completedTasks = computed(() => tasks.value.filter(task => task.is_complet
 const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_complete))
 </script>
 
-<template>
+<template >
   <AppHeader/>
   <article>
     <h1 hidden>Dashboard</h1>
@@ -36,14 +35,9 @@ const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_compl
     </section>
     <EditTaskModal v-if="taskStore.editModalOpen" />
   </article>
-  <AppFooter/>
 </template>
 
 <style scoped>
-
-template {
-  padding-bottom: 10vh; /* Espacio para el footer */
-}
 
 .tasks-order {
   margin-top: 220px;

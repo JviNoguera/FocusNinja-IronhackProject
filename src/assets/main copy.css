@@ -1,0 +1,41 @@
+
+@import "https://fonts.googleapis.com/css2?family=Orbitron:wght@400&display=swap"; /* Clock's font */
+@import "https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap";
+
+:root {
+    --bg-color: whitesmoke;
+    --secondary-bg-color: gainsboro;
+    --btn-color: gray;
+    --btn-hover-color: rgba(20, 19, 19, 0.757);
+    --label-color: gray;
+    --negative-action: rgb(188, 22, 22, 0.8);
+    --btn-text-color: whitesmoke;
+    --text-color: gray;
+    --border-radius: 5px;
+    --inner-items-box-shadow: gray 0px 0px 10px;
+    --primary-font: 'Rubik', sans-serif;
+    --regular-box-shadow: 0 0 10px 0 gray;
+    --negative-action: rgb(188, 22, 22, 0.8);
+    --edit-action: rgb(187, 187, 42, 0.8);
+    --complete-action: rgb(42, 187, 42, 0.8);
+    --modal-shadow-color-light: 0 0 20px rgba(0, 0, 0, 0.1);
+    --modal-overlay-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+*, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+    border-radius: var(--border-radius);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+p, span {
+    font-weight: 300;
+    font-size: 10px;
+}
