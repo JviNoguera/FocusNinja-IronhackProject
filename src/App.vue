@@ -34,12 +34,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <section>
-      <router-view class="sized"></router-view>
-    </section>
-    <AppFooter />
-  </div>
+    <router-view class="sized"></router-view>
+    <AppFooter/>
 </template>
 
 <style scoped>

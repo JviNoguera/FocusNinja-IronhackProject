@@ -21,8 +21,8 @@ function signUp () {
 </script>
 
 <template>
-    <form @submit.prevent="signUp">
-        <div class="signUp">
+    <img src="/src/assets/Ninja.png" alt="">
+    <form @submit.prevent="signUp" class="signUp">
             <div class="email">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" v-model="email" placeholder="introduce your e-mail: taskninja@example.com" required> 
@@ -35,84 +35,62 @@ function signUp () {
                 <label for="password">Confirm Password</label>
                 <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Please confirm your password" required>
             </div>
-            <div>
-                <button class="submitButton" type="submit"> Let's get started!</button>
-            </div>
-        </div>
+            <button class="submitButton" type="submit"> Let's get started!</button>      
     </form>
 </template>
 
 <style scoped>
 
-/* Form */
-
 .signUp {
-  width: 500px;
-  margin: 30px 120px;
+  width: 50%;
   text-align: left;
-  margin-top: 10%;
-  background-color: whitesmoke;
+  margin-top: 2%;
+  background-color: var(--bg-color);
   border: none;
-  box-shadow: gray 0px 0px 10px;
+  box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
+  margin-bottom: 2%;
+}
+
+img {
+  width: 250px;
+  height: 250px;
+  margin-top: 5%;
 }
 
 input {
-  background: gainsboro;
+  background: var(--secondary-bg-color);
 }
 
 label {
-  color: grey;
+  color: var(--label-color);
   font-size: 14px;
   margin-left: 5px;
 }
 
-.email {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-#email {
-  width: 480px;
-  border: none;
-  background-color: gainsboro;
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
-.password {
-  width: 100%;
-  margin-top: 10px;
-}
-
-#password {
-  width: 480px;
-  border: none;
-  background-color: gainsboro;
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
+.email,
+.password,
 .confirmPassword {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 10px;
 }
 
+#email,
+#password,
 #confirmPassword {
-  width: 480px;
+  width: 100%;
   border: none;
-  background-color: gainsboro;
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
 }
 
 .submitButton {
-  width: 480px;
-  background-color: gray;
-  color: #f2f4fc;
+  width: 100%;
+  background-color: var(--btn-color);
+  color: var(--btn-text-color);
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -123,7 +101,19 @@ label {
 }
 
 .submitButton:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color: var(--btn-hover-color);
 }
 
+
+@media (max-width: 576px) {
+  
+  .signUp{
+    width: 80%;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
 </style>

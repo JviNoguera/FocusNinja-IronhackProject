@@ -4,9 +4,11 @@ import { defineStore } from 'pinia'
 import supabase from '../supabase.js'
 import { useUserStore } from '../stores/user.js'
 
+
 export const useTaskStore = defineStore('tasks', {
   state: () => ({
-    tasks: null,
+    //task is an array, to retrieve them properly from dashboard onMount
+    tasks: [],
     editModalOpen: false,
     selectedTask: null
   }),

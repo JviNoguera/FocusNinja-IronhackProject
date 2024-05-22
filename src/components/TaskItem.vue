@@ -8,12 +8,25 @@ const props = defineProps({task: Object})
 const show = ref(false)
 const message = ref('')
 
+// function to format the reminder date
+const formatDate = (reminder) => {
+  if (!reminder) return ''; 
+  const date = new Date(reminder); 
+  const day = date.getDate().toString().padStart(2, '0'); 
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+  const year = date.getFullYear();
+  const hours = date.getHours().toString().padStart(2, '0'); 
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  return `${day}/${month}/${year} at ${hours}:${minutes}hrs`; 
+}
 
+// function to show snackbar
 function showSnackBar(msg) {
     message.value = msg
     show.value = true
 }
 
+// function to close snackbar
 function closeSnackBar() {
   show.value = false
 }
@@ -24,6 +37,7 @@ function showConfirmation() {
     }, 7000)
     showSnackBar('Are you sure you want to delete this task?')
 }
+
 
 function confirm() {
   show.value = false
@@ -58,7 +72,7 @@ function openEditModal() {
       <h4>It will take you {{ task.duration + " min, " }} to do this</h4>
       <div v-if="task.reminder !== null">
         <h4>You're supposed to start at:</h4>
-        <p>{{ task.reminder }}</p>
+        <p>{{ formatDate(task.reminder) }}</p>
       </div>
       <div class="taskButtons">
         <button class="kebabBtn completeBtn" aria-label="Mark as Complete" @click="completeTask">•</button>
@@ -66,7 +80,7 @@ function openEditModal() {
         <button class="kebabBtn editBtn" aria-label="Edit this task" @click="openEditModal">•</button>
       </div>
       <div class="completeButtons-container" v-if="task.is_complete">
-        <p>COMPLETED</p>
+        <p>Completed</p>
         <div class="KebabBtnComplete">
           <button class="kebabBtn moveToPendingBtn" aria-label="Move to pending tasks" @click="completeTask">•</button>
           <button class="kebabBtn deleteBtn" aria-label="Delete this task" @click="showConfirmation">•</button>
@@ -204,8 +218,7 @@ function openEditModal() {
   padding: 10px;
   border-radius: 5px;
   font-size: xx-small;
-  color: var(--label-color);
-  
+  color: var(--text-color);
 }
 
 .completedTask:hover {
@@ -264,5 +277,39 @@ function openEditModal() {
   border-radius: 5px;
   cursor: pointer;
   margin-block-start: 5px;
+}
+
+@media (max-width: 576px) {
+
+  .taskItem {
+    width: 250px;
+    text-align: left;
+    background-color: var(--bg-color);
+    border: none;
+    box-shadow: var(--inner-items-box-shadow);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: x-small;
+    position: relative; /* Agregamos posición relativa para los botones */
+  }
+    .completedTask {
+    width: 150px;
+    text-align: left;
+    background-color:var(--special-completed-color);
+    border: none;
+    box-shadow: var(--inner-items-box-shadow);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 6px;
+    color: var(--text-color);
+  }
+
+  .kebabBtn {
+    font-size: 25px;
+  }
+  .completeButtons-container p {
+    font-size: 12px;
+  }
+
 }
 </style>

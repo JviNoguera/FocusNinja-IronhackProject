@@ -54,7 +54,6 @@ import { RouterLink } from 'vue-router';
   text-align: center;
   font-size: smaller;
   box-shadow: var(--regular-box-shadow);
-  
 }
 
 .footer-content {
@@ -63,7 +62,9 @@ import { RouterLink } from 'vue-router';
   align-items: center;
 }
 
-.footer-left, .footer-center, .footer-right {
+.footer-left,
+.footer-center,
+.footer-right {
   flex: 1;
   text-align: center;
 }
@@ -128,5 +129,28 @@ import { RouterLink } from 'vue-router';
 .copyright {
   margin-top: 10px;
   font-size: 12px;
+}
+
+
+@media (max-width: 576px) {
+  
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer-left {
+    margin-bottom: 5px;
+  }
+  
+  .footer-right {
+    margin-top: 10px;
+  }
+  
+  .footer-bottom {
+   display: none;
+  }
+  
 }
 </style>

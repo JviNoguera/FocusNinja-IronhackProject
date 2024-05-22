@@ -48,8 +48,8 @@ function toggleMenu() {
                         </li>
                     </ul>
                 </div>
-            <RouterLink class="appLogo" to="/">
-                <img src="/src/assets/Focus_Ninja-removebg-preview.png" alt="logo">
+            <RouterLink class="appLogo" to="/logo">
+                <img src="/src/assets/LogoMini.png" alt="logo">
             </RouterLink>
         </div>
         <div class="navBar-center">
@@ -209,6 +209,34 @@ svg {
     height: 20px; 
 }
 
+@media (max-width: 576px) {
+
+    .navBar {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .avatar img {
+        display: none;  
+    }
+
+    .navLink {
+        width: 200px;
+        height: 70px;
+    }
+    
+    .appLogo {
+        display: none;
+    }
+
+    .signOutBtn {
+        border-radius: 5%;
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+
+    }
+}
 </style> 
 
 

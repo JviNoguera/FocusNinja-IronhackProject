@@ -9,7 +9,7 @@
     --btn-color: rgb(138, 43, 226, 0.7);
     --btn-hover-color:  rgb(138, 43, 226);
     --label-color: rgb(138, 44, 226);
-    --special-completed-color:  rgb(138, 44, 226, 0.2);
+    --special-completed-color:  gainsboro;
     --negative-action: rgb(188, 22, 22, 0.8);
     --btn-text-color: whitesmoke;
     --text-color: rgb(13, 11, 34);
@@ -44,3 +44,29 @@ p, span {
     font-weight: 300;
     font-size: 10px;
 }
+
+@media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+
+

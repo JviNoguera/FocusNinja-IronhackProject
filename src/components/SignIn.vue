@@ -33,54 +33,40 @@ async function checkUser() {
 </script>
 
 <template>
-  <section class="containerSignIn">
-    <img src="/src/assets/Focus_Ninja-removebg-preview.png" alt="">
-    <form @submit.prevent="checkUser">
-      <div class="signIn">
+    <img src="/src/assets/Ninja.png" alt="">
+    <form @submit.prevent="checkUser" class="signIn">
         <div class="email">
           <label for="email">E-mail</label>
           <input type="email" id="email" v-model="email" placeholder="taskninja@example.com"/>
         </div>
-        <div>
+        <div class="password">
           <label for="password">Password</label>
           <input type="password" id="password" v-model="password" placeholder="YourPassword"/>
         </div>
-        <div>
-          <button class="submitButton" type="submit">Sign In</button>
-        </div>
-      </div>
+        <button class="submitButton" type="submit">Sign In</button>
     </form>
-  </section>
 </template>
 
 <style scoped>
 
 /* Form */
 
-.containerSignIn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+.signIn {
+  width: 50%;
+  text-align: left;
+  margin-top: 3%;
+  background-color: var(--bg-color);
+  border: none;
+  box-shadow: var(--inner-items-box-shadow);
+  padding: 10px;
+  margin-bottom: 2%;
 }
 
 img {
   width: 250px;
   height: 250px;
   margin-top: 5%;
-
-}
-
-.signIn {
-  width: 500px;
-  margin: 30px 120px;
-  text-align: left;
-  margin-top: 5%;
-  background-color: var(--bg-color);
-  border: none;
-  box-shadow: var(--inner-items-box-shadow);
-  padding: 10px;
-  border-radius: 5px;
 }
 
 input {
@@ -93,38 +79,25 @@ label {
   margin-left: 5px;
 }
 
-.email {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-#email {
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-  border-radius: 5px;
-}
-
+.email,
 .password {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 10px;
 }
 
+#email,
 #password {
-  width: 480px;
+  width: 100%;
   border: none;
-  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
-  border-radius: 5px;
 }
 
 .submitButton {
-  width: 480px;
+  width: 100%;
   background-color: var(--btn-color);
   color: var(--btn-text-color);
   height: 70px;
@@ -134,11 +107,22 @@ label {
   border-style: none;
   margin-block-start: 20px;
   margin-bottom: 5px;
-  border-radius: 5px;
 }
 
 .submitButton:hover {
   background-color: var(--btn-hover-color);
+}
+
+@media (max-width: 576px) {
+  
+  .signIn {
+    width: 80%;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 </style>

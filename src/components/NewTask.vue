@@ -42,9 +42,7 @@ function toggleTaskMaker() {
     <div class="taskMakerMenuContainer">
         <button class="taskMakerMenu-btn" @click="toggleTaskMaker">Create New Task</button>
     </div>
-    <div class="taskMaker" v-if="isTaskMakerOpen">
-    <form @submit.prevent="handleSubmit">
-      <div>
+    <form @submit.prevent="handleSubmit" class="taskMaker" v-if="isTaskMakerOpen">
         <div class="title">
           <label for="titleForm">Title</label>
           <input
@@ -53,7 +51,7 @@ function toggleTaskMaker() {
              v-model="title"
              placeholder="Ex: Preps for tonight's dinner!"
              required/>
-         </div>
+        </div>
         <div class="description">
            <label for="descriptionForm">Description</label>
           <input
@@ -61,8 +59,8 @@ function toggleTaskMaker() {
             id="descriptionForm"
             v-model="description"
              placeholder="Ex: Go to the grocery store, get cabbages, bacon and boil some potatoes!"/>
-         </div>
-         <section class="containerDurationReminder">
+        </div>
+        <div class="containerDurationReminder">
            <div class="duration">
              <label for="durationForm">How many time i need?</label>
              <select id="durationForm" v-model="selectedDuration" @change="handleDurationChange">
@@ -85,11 +83,9 @@ function toggleTaskMaker() {
              <label for="reminderForm">Starting Time</label>
              <input type="datetime-local" id="reminderForm" v-model="reminder" />
            </div>
-         </section>
-         <button class="submitButton" type="submit">Create New Task</button>
-      </div>
+        </div>
+        <button class="submitButton" type="submit">Create New Task</button>
     </form>
-  </div>
 </template>
 
 <style scoped>
@@ -129,7 +125,7 @@ function toggleTaskMaker() {
   top: 230px;
   left: 50%; 
   transform: translateX(-50%);
-  width: 500px;
+  width: 50%;
   box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
   z-index: 1;
@@ -147,31 +143,16 @@ label {
   font-weight: 500;
   
 }
-
-.title {
+.title,
+.description {
   width: 100%;
   margin-top: 15px;
 }
 
-#titleForm {
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
-.description {
-  width: 100%;
-  margin-top: 10px;
-  margin-top: 20px;
-}
-
+#titleForm,
 #descriptionForm {
-  width: 480px;
+  width: 100%;
   border: none;
-  background-color: var(--secondary-bg-color);
   height: 60px;
   margin-block-start: 10px;
   padding-left: 15px;
@@ -179,26 +160,20 @@ label {
 
 .containerDurationReminder {
   display: flex;
-  width: 480px;
+  width: 100%;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-.containerDurationReminder div {
-  width: 48%;
-}
-
-.duration {
-  width: 100%;
-  margin-block-start: 10px;
-}
-
+.duration,
 .reminder {
-  width: 100%;
+  width: 48%;
   margin-block-start: 10px;
 }
 
-#durationForm {
+
+#durationForm,
+#reminderForm {
   width: 100%;
   border: none;
   background-color: var(--secondary-bg-color);
@@ -208,28 +183,10 @@ label {
   margin-left: auto;
 }
 
-.duration select {
-  color: var(--text-color);
-}
-
-#reminderForm {
-  margin-right: 10px;
-  width: 100%;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  padding-left: 15px;
-  margin-block-start: 10px;
-}
-
-.reminder input {
-  color: var(--text-color);
-}
-
 .submitButton {
   background-color: var(--btn-color);
   color: var(--btn-text-color);
-  width: 480px;
+  width: 100%;
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -242,5 +199,21 @@ label {
 
 .submitButton:hover {
     background-color: var(--btn-hover-color);
+}
+
+@media (max-width: 576px) {
+  .taskMaker {
+    width: 80%;
+  }
+
+  .containerDurationReminder {
+    flex-direction: column;
+  }
+
+  .duration,
+  .reminder {
+    width: 100%;
+  }
+
 }
 </style>

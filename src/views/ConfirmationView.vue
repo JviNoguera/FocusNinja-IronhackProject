@@ -9,7 +9,7 @@ function resendEmail() {
 <template>
   <article class="confirmation-container">
       <section class="email-confirmation confirmation-container">
-        <img src="/src/assets/Focus_Ninja-removebg-preview.png" alt="">
+        <img src="/src/assets/Ninja.png" alt="">
         <h1>Verify Your Email Address</h1>
         <p>We have sent an email to your address. Please check your inbox and follow the instructions to verify your account.</p>
         <div class="instructions">
@@ -106,7 +106,12 @@ function resendEmail() {
 }
 
 .resend-button:hover {
-    background-color: rgba(20, 19, 19, 0.757);
+    background-color: var(--btn-hover-color);
 }
 
+@media (max-width: 576px) {
+  .email-confirmation {
+    width: 80%;
+  }
+}
 </style>

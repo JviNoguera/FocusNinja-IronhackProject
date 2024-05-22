@@ -16,7 +16,7 @@ const completedTasks = computed(() => tasks.value.filter(task => task.is_complet
 const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_complete))
 </script>
 
-<template >
+<template>
   <AppHeader/>
   <article>
     <h1 hidden>Dashboard</h1>
@@ -43,6 +43,7 @@ const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_compl
   margin-top: 220px;
   min-height: 70vh;
   display: flex;
+  margin-bottom: 2vh;
 }
 
 .incompleteTasks {
@@ -63,6 +64,16 @@ const incompleteTasks = computed(() => tasks.value.filter(task => !task.is_compl
   align-items: center;
   padding: 1px;
 }
+
+@media (max-width: 576px) {
+  
+  .incompleteTasks {
+    width: 60%;
+  }
+  .completedTasks {
+    width: 40%;
+  }
+} 
 
 
 </style>

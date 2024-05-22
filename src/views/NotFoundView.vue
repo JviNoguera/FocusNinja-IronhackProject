@@ -86,7 +86,7 @@ import { RouterLink } from 'vue-router';
 
 .message__text {
   font-size: 20px;
-  color: var(--text-color);
+  color: var(--secondary-text-color);
   margin-top: 10px;
 }
 
@@ -107,4 +107,13 @@ import { RouterLink } from 'vue-router';
   background: var(--edit-action);
 }
 
+@media (max-width: 576px) {
+  .message__title {
+    font-size: 40px;
+  }
+
+  .message__text {
+    font-size: 16px;
+  }
+}
 </style>

@@ -40,6 +40,40 @@ export const useProfileStore = defineStore('profile', {
       await this.fetchProfile()
 
     },
+    async editProfile(profileData) {
+      const userStore = useUserStore()
+      const userId = userStore.user.id
 
+      // Profile verification 
+      const { data: existingProfile, error: fetchError } = await supabase
+        .from('profile')
+        .select('*')
+        .eq('user_id', userId)
+
+      if (fetchError) {
+        console.error('Error while fetching existing profile:', fetchError.message)
+        throw fetchError
+      }
+
+      // if there is an existing profile, update it
+      if (existingProfile) {
+        const { error: updateError } = await supabase
+          .from('profile')
+          .update(profileData)
+          .eq('user_id', userId)
+
+        if (updateError) {
+          console.error('Error while updating profile:', updateError.message)
+          throw updateError
+        }
+        
+        // Update profile in local state
+        await this.fetchProfile()
+      } else {
+
+        // if there is no existing profile, add a new one
+        await this.addProfile(profileData)
+      }
+    },
   }
 })

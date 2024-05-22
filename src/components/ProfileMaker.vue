@@ -19,7 +19,7 @@ const avatar_url = ref(null)
 
 // function to save edited task
 const handleSubmit = async () => {      
-  await profileStore.addProfile({
+  await profileStore.editProfile({
     name: name.value,
     username: username.value,
     website: website.value,
@@ -45,20 +45,20 @@ watchEffect(() => {
 </script>
 
 <template>
-  <article class="profile">
-    <div v-if="profiles" >
+  <article class="profile-container">
+    <div v-if="profiles" class="profile profileCard-container">
       <div class="avatarProfile">
         <img :src="profiles.avatar_url" alt="profile pic">
       </div>
-      <h2> Name: {{ profiles.name }} </h2>
-      <h2> Username: {{ profiles.username }} </h2>
-      <h2> Website: {{ profiles.website }} </h2>
-      <h2> Email: {{ profiles.email }} </h2>
+      <div>
+        <h2> Name: {{ profiles.name }} </h2>
+        <h2> Username: {{ profiles.username }} </h2>
+        <h2> Website: {{ profiles.website }} </h2>
+        <h2> Email: {{ profiles.email }} </h2>
+      </div>
     </div>
-  </article>
-  <article>
-    <div class="profileMaker">
-      <form @submit.prevent="handleSubmit">
+  
+    <form @submit.prevent="handleSubmit" class="profileMaker">
         <div class="name">
           <label for="nameForm">Name</label>
           <input type="text" id="nameForm"
@@ -79,55 +79,62 @@ watchEffect(() => {
           <input type="text" id="emailForm"
             v-model="email"/>
         </div>
-        <section class="avatar">
+        <div class="avatar">
           <label for="avatarForm">Avatar</label>
           <input type="text" id="avatarForm"
             v-model="avatar_url" placeholder="avatar"/>
-        </section>
+        </div>
         <button class="submitButton" type="submit">Update your Profile</button>
-      </form>
-    </div>
+    </form>
   </article>
 </template>
 
 <style scoped>
 
-.profile {
-  width: 500px;
-  margin: 100px auto;
-  margin-bottom: 0%;
-  text-align: left;
-  background-color: var(--bg-color);
-  border: none;
-  box-shadow: var(--inner-items-box-shadow);
-  padding: 30px;
-  font-size: small;
-  
-}
-
-.avatarProfile {
+.profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  margin-top: 5%;
 }
 
-/* aqui poner la tarjeta de perfil */
+.profileCard-container {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.profile { 
+  width: 50%;
+  text-align: left;
+  background-color: var(--bg-color);
+  box-shadow: var(--inner-items-box-shadow);
+  padding: 30px;
+  font-size: x-small;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.avatarProfile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
 
 .profileMaker {
-  width: 500px;
-  margin: 50px auto;
+  width: 50%;
   text-align: left;
   background-color: var(--bg-color);
   border: none;
   box-shadow: var(--inner-items-box-shadow);
   padding: 10px;
-  
-
+  margin-bottom: 5%;
 }
 
 input {
-  background: gainsboro;
+  background: var(--secondary-bg-color);
 }
 
 label {
@@ -142,8 +149,12 @@ label {
   margin-top: 15px;
 }
 
-#nameForm{
-  width: 480px;
+#nameForm,
+#usernameForm,
+#websiteForm,
+#emailForm,
+#avatarForm {
+  width: 100%;
   border: none;
   background-color: var(--secondary-bg-color);
   height: 60px;
@@ -151,66 +162,19 @@ label {
   padding-left: 15px;
 }
 
-.username{
+.name,
+.username,
+.website,
+.email,
+.avatar {
   width: 100%;
   margin-top: 15px;
-}
-
-#usernameForm{
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
-.website{
-  width: 100%;
-  margin-top: 15px;
-}
-
-#websiteForm{
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
-.email{
-  width: 100%;
-  margin-top: 15px;
-}
-
-#emailForm{
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
-}
-
-.avatar{
-  width: 100%;
-  margin-top: 15px;
-}
-
-#avatarForm{
-  width: 480px;
-  border: none;
-  background-color: var(--secondary-bg-color);
-  height: 60px;
-  margin-block-start: 10px;
-  padding-left: 15px;
 }
 
 .submitButton {
+  width: 100%;
   background-color: var(--btn-color);
   color: var(--btn-text-color);
-  width: 480px;
   height: 70px;
   cursor: pointer;
   box-shadow: none;
@@ -224,5 +188,23 @@ label {
 .submitButton:hover {
     background-color: rgba(20, 19, 19, 0.757);
 }
+
+@media (max-width: 576px) {
+  
+  .profileCard-container {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 25%;
+  }
+
+  .profile {
+    width: 80%;
+    font-size: xx-small;
+  }
+
+  .profileMaker {
+    width: 80%;
+  } 
+} 
 
 </style>

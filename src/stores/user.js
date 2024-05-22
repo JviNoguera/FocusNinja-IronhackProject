@@ -2,6 +2,9 @@
 
 import { defineStore } from 'pinia';
 import supabase from '../supabase.js';
+import { useProfileStore } from './profile.js';
+
+
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -23,6 +26,8 @@ export const useUserStore = defineStore('user', {
       });
       if (error) throw error;
       if (data) this.user = data.user;
+      const profileStore = useProfileStore();
+      await profileStore.fetchProfile();
     },
     // function to sign up the user
     async signUp (email, password) {
@@ -39,6 +44,7 @@ export const useUserStore = defineStore('user', {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       this.user = null;
+      this.profile = null;
     },
     // persist to keep the user logged in even if the page is refreshed.
     persist: {
