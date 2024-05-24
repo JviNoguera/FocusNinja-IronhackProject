@@ -1,12 +1,14 @@
-# README! - Focus Ninja - Task Manager 
+# README! - Focus Ninja - Task Manager
 
 ## Deploy URL:
 
-- [Midterm Deploy URL](https://focusninja.netlify.app/)
+- [Deploy URL](https://focusninja.netlify.app/)
 
-## Presentation:
+## Presentation: 
 
-- Presentation/file here!
+ src/assets/FocusNinja_presentation.pdf
+
+- Presentation: 
 
 ## Technologies Used:
 
@@ -54,5 +56,5 @@ Below is a list of the technologies used in this project, along with their respe
 ### Credits:
 
 - Juan Noguera
-    @_juanvi
-    juanvinoguera@gmail.com 
+  @_juanvi
+  juanvinoguera@gmail.com

@@ -5,9 +5,9 @@
 :root {
     /* rgb(242, 198, 28, 0.8) */
     --bg-color: white;
-    --secondary-bg-color: gainsboro ;
+    --secondary-bg-color: #dcdcdc ;
     --btn-color: rgb(138, 43, 226, 0.7);
-    --btn-hover-color:  rgb(138, 43, 226);
+    --btn-hover-color:  #8a2be2;
     --label-color: rgb(138, 44, 226);
     --special-completed-color:  gainsboro;
     --negative-action: rgb(188, 22, 22, 0.8);
